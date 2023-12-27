@@ -6,7 +6,7 @@
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
   <meta name="description" content="">
-  <meta property="og:title" content="Language Models as Black-Box Optimizers for Vision-Language Models" />
+  <meta property="og:title" content="The Neglected Tails of Vision Language Models." />
   <meta property="og:description" content="" />
   <meta property="og:url" content="" />
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
@@ -15,7 +15,7 @@
   <meta property="og:image:height" content="630" />
 
 
-  <meta name="twitter:title" content="Language Models as Black-Box Optimizers for Vision-Language Models">
+  <meta name="twitter:title" content="The Neglected Tails of Vision Language Models.">
   <meta name="twitter:description" content="">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <meta name="twitter:image" content="static/images/twitter_banner_image.png">
@@ -52,29 +52,38 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Language Models as Black-Box Optimizers for Vision-Language Models
+            <h1 class="title is-1 publication-title">The Neglected Tails of Vision Language Models
             </h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a target="_blank">Shihong Liu</a><sup>*</sup>,</span>
+                <a target="_blank">Shubham Parashar</a><sup>*</sup><sup>1</sup>,</span>
               <span class="author-block">
-                <a target="_blank">Samuel Yu</a><sup>*</sup>,</span>
+                <a target="_blank">Zhiqiu Lin</a><sup>*</sup><sup>2</sup>,</span>
               <span class="author-block">
-                <a target="_blank">Zhiqiu Lin</a><sup>*</sup>,</span>
+                <a target="_blank">Tian Liu</a><sup>*</sup><sup>1</sup>,</span>
               <span class="author-block">
-                <a target="_blank">Ryan Lee</a>,</span>
+                <a target="_blank">Xiangjue Dong</a><sup>1</sup>,</span>
               <span class="author-block">
-                <a target="_blank">Tiffany Ling</a>,</span>
+                <a target="_blank">Tiffany Ling</a><sup>2</sup>,</span>
               <span class="author-block">
-                <a target="_blank">Deepak Pathak</a>,</span>
+                <a target="_blank">Yanan Li</a><sup>4</sup>,</span>
               <span class="author-block">
-                <a target="_blank">Deva Ramanan</a>
+                <a target="_blank">James Caverlee</a><sup>1</sup>
+              </span>
+              <span class="author-block">
+                <a target="_blank">Deva Ramanan</a><sup>2</sup>
+              </span>
+              <span class="author-block">
+                <a target="_blank">Shu Kong</a><sup>1</sup><sup>,</sup><sup>3</sup>
               </span>
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block">Carnegie Mellon University<br></span>
+              <span class="author-block"><sup>1</sup>Texas A&M University<br></span>
+              <span class="author-block"><sup>2</sup>Carnegie Mellon University<br></span>
+              <span class="author-block"><sup>3</sup>University of Macau<br></span>
+              <span class="author-block"><sup>4</sup>Zhejiang Lab<br></span>
               <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
             </div>
 
@@ -93,7 +102,7 @@
 
                 <!-- Github link -->
                 <span class="link-block">
-                  <a href="https://github.com/shihongl1998/LLM-as-a-blackbox-optimizer" target="_blank"
+                  <a href="https://github.com/shubhamprshr27/NeglectedTailsVLM" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
@@ -121,30 +130,40 @@
   </section>
 
   <!-- Paper abstract -->
-  <section class="section hero is-light">
+  <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
-            <p>
-              Vision-language models (VLMs) pre-trained on webscale datasets have demonstrated remarkable capabilities
-              on downstream tasks when fine-tuned with minimal data. However, many VLMs rely on proprietary data and are
-              not open-source, which restricts the use of white-box approaches for fine-tuning. As such, we aim to
-              develop a black-box approach to optimize VLMs through natural language prompts, thereby avoiding the need
-              to access model parameters, feature embeddings, or even output logits. We propose employing chat-based
-              LLMs to search for the best text prompt for VLMs. Specifically, we adopt an automatic “hill-climbing”
-              procedure that converges to an effective prompt by evaluating the performance of current prompts and
-              asking LLMs to refine them based on textual feedback, all within a conversational process without
-              human-in-the-loop. In a challenging 1-shot image classification setup, our simple approach surpasses the
-              white-box continuous prompting method (CoOp) by an average of 1.5% across 11 datasets including ImageNet.
-              Our approach also outperforms both human-engineered and LLM-generated prompts. We highlight the
-              advantage of conversational feedback that incorporates both positive and negative prompts, suggesting
-              that LLMs can utilize the implicit “gradient” direction in textual feedback for a more efficient search.
-              In addition, we find that the text prompts generated through our strategy are not only more interpretable
-              but also transfer well across different VLM architectures in a black-box manner. Lastly, we demonstrate
-              our framework on a state-of-the-art black-box VLM (DALL-E 3) for text-to-image optimization.
+            <p style="text-align: justify;">
+              Vision-language models (VLMs) such as CLIP excel in zero-shot recognition but 
+              exhibit drastically imbalanced performance across visual concepts in downstream 
+              tasks. For example, despite an impressive mean zero-shot accuracy on ImageNet 
+              (72.7%), CLIP yields less than 10% on 10 concepts (e.g., tailed frog and night 
+              snake), presumably because these concepts are under-represented in VLMs' 
+              imbalanced pretraining datasets. Yet, assessing this imbalance is challenging, 
+              as calculating the frequency of specific concepts within large-scale pretraining 
+              data is not straightforward. In this work, we make the first attempt to measure 
+              the concept frequency in VLMs' pretraining data by analyzing pretraining 
+              texts. We use off-the-shelf language models to help count relevant texts that 
+              contain synonyms of the given concepts and resolve ambiguous cases. Our analysis 
+              confirms that popular VLM datasets like LAION indeed exhibit a long-tailed 
+              concept distribution, which strongly correlates with per-class accuracies. 
+              Further, mainstream multimodal systems, including visual chatbots and 
+              text-to-image models, struggle with the rare concepts identified by our method. 
+              Next, to mitigate VLMs' imbalanced performance in zero-shot recognition, we 
+              propose <strong>RE</strong>trieval-<strong>A</strong>ugmented <strong>L</strong>earning <strong>(REAL)</strong>. First, instead of prompting VLMs 
+              using the original class names defined in a downstream task, REAL uses their 
+              most frequent synonyms found in the pretraining texts. This already outperforms 
+              human-engineered and LLM-generated prompts over nine benchmark datasets, likely 
+              because VLMs have seen more images associated with the frequently used synonyms. 
+              Second, REAL uses all the concept synonyms to retrieve a small, class-balanced 
+              set of pretraining data to train a robust classifier. REAL surpasses the recent 
+              retrieval-augmented solution REACT, using 400 times less storage and 10,000 
+              times less training time!
             </p>
+          
           </div>
         </div>
       </div>
@@ -158,27 +177,192 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Methods Overview</h2>
+          <h2 class="title is-3">Strong Correlation of Concept Frequency and Accuracy</h2>
           <div class="content has-text-justified">
 
             <div class="item">
               <!-- Your image here -->
-              <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
-                style="width: 850px; height: auto; display: block; margin: 0 auto;">
+              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>
+              <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/> -->
+              <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
+                style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
+                <section class="hero is-big">
+                  <div class="hero-body">
+                    <div class="container" >
+                      <div id="results-carousel" class="carousel results-carousel">
+    
+                        <div class="item">
+    
+                          <div class="query-container">
+                            <p class="user-query">ImageNet</p>
+                          </div>
+    
+                          <!-- Image container -->
+                          <div class="images-container" style="align-items: center;">
+                            
+                            <div class="image-with-subtitle">
+                              <img src="static/images/imagenet_1k_freq.png" alt="1" style="height: 320px;"/>
+                              <p class="subtitle-text">Frequency Distribution</p>
+                            </div>
+                            <div class="image-with-subtitle" >
+                              <img src="static/images/imagenet_1k_acc.png" alt="2" style="height: 320px;"/>
+                              <p class="subtitle-text">Zero-Shot Accuracy</p>
+                            </div>
+    
+                          </div>
+    
+                        </div>
+    
+                        <div class="item">
+    
+                          <div class="query-container">
+                            <p class="user-query">Flowers</p>
+                          </div>
+    
+                          <!-- Image container -->
+                          <div class="images-container">
+    
+                            <div class="image-with-subtitle">
+                              <img src="static/images/flowers102_freq.png" alt="1" style="height: 320px;"/>
+                              <p class="subtitle-text">Frequency Distribution</p>
+                            </div>
+                            <div class="image-with-subtitle">
+                              <img src="static/images/flowers102_acc.png" alt="2" style="height: 320px;"/>
+                              <p class="subtitle-text">Zero-Shot Accuracy</p>
+                            </div>
+    
+                          </div>
+    
+                        </div>
+    
+                        <div class="item">
+    
+                          <div class="query-container">
+                            <p class="user-query">Aircraft</p>
+                          </div>
+    
+                          <!-- Image container -->
+                          <div class="images-container">
+    
+                            <div class="image-with-subtitle">
+                              <img src="static/images/fgvc_aircraft_freq.png" alt="1" style="height: 320px;"/>
+                              <p class="subtitle-text">Frequency Distribution</p>
+                            </div>
+                            <div class="image-with-subtitle">
+                              <img src="static/images/fgvc_aircraft_acc.png" alt="2" style="height: 320px;"/>
+                              <p class="subtitle-text">Zero-Shot Accuracy</p>
+                            </div>
+    
+                          </div>
+    
+                        </div>
+    
+    
+                        <div class="item">
+    
+                          <div class="query-container">
+                            <p class="user-query">CUB</p>
+                          </div>
+    
+                          <!-- Image container -->
+                          <div class="images-container">
+    
+                            <div class="image-with-subtitle">
+                              <img src="static/images/cub2011_freq.png" alt="1" style="height: 320px;" />
+                              <p class="subtitle-text">Frequency Distribution</p>
+                            </div>
+                            <div class="image-with-subtitle">
+                              <img src="static/images/cub2011_acc.png" alt="2" style="height: 320px;"/>
+                              <p class="subtitle-text">Zero-Shot Accuracy</p>
+                            </div>
+    
+                          </div>
+    
+                        </div>
+    
+    
+                        <div class="item">
+    
+                          <div class="query-container">
+                            <p class="user-query">Cars</p>
+                          </div>
+    
+                          <!-- Image container -->
+                          <div class="images-container">
+    
+                            <div class="image-with-subtitle">
+                              <img src="static/images/stanford_cars_freq.png" alt="1" style="height: 320px;"/>
+                              <p class="subtitle-text">Frequency Distribution</p>
+                            </div>
+                            <div class="image-with-subtitle">
+                              <img src="static/images/stanford_cars_acc.png" alt="2" style="height: 320px;"/>
+                              <p class="subtitle-text">Zero-Shot Accuracy</p>
+                            </div>
+    
+                          </div>
+    
+                        </div>
+    
+                        <div class="item">
+    
+                          <div class="query-container">
+                            <p class="user-query">Pets</p>
+                          </div>
+    
+                          <!-- Image container -->
+                          <div class="images-container">
+    
+                            <div class="image-with-subtitle">
+                              <img src="static/images/oxford_pets_freq.png" alt="1" style="height: 320px;"/>
+                              <p class="subtitle-text">Frequency Distribution</p>
+                            </div>
+                            <div class="image-with-subtitle">
+                              <img src="static/images/oxford_pets_acc.png" alt="2" style="height: 320px;"/>
+                              <p class="subtitle-text">Zero-Shot Accuracy</p>
+                            </div>
+    
+                          </div>
+    
+                        </div>
+    
+                        <div class="item">
+    
+                          <div class="query-container">
+                            <p class="user-query">Food</p>
+                          </div>
+    
+                          <!-- Image container -->
+                          <div class="images-container">
+    
+                            <div class="image-with-subtitle">
+                              <img src="static/images/food101_freq.png" alt="1" style="height: 320px;"/>
+                              <p class="subtitle-text">Frequency Distribution</p>
+                            </div>
+                            <div class="image-with-subtitle">
+                              <img src="static/images/food101_acc.png" alt="2" style="height: 320px;"/>
+                              <p class="subtitle-text">Zero-Shot Accuracy</p>
+                            </div>
+    
+                          </div>
+    
+                        </div>    
+    
+                      </div>
+                    </div>
+                  </div>
+                </section>
 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                Similar to how human prompt engineers iteratively test and refine prompts, we employ ChatGPT to
-                continuously optimize prompts for vision-language models (VLMs). Our iterative approach assesses the
-                performance of ChatGPT-generated prompts on a few-shot dataset (highlighted in <span
-                  style="color: blue;">blue</span>) and provides feedback (marked in <span
-                  style="color: violet;">violet</span>) to ChatGPT through simple conversations, as depicted in the
-                illustrative figure. This straightforward method delivers state-of-the-art results for one-shot image
-                classification across 11 datasets using CLIP, operated in a black-box manner without accessing model
-                weights, feature embeddings, or output logits. Remarkably, our approach outperforms both white-box
-                methods such as
-                gradient-based continuous prompting (CoOp) and human-engineered prompts in this extremely low-shot
-                scenario. This figure only shows a typical conversation using ChatGPT's web user interface. Our code
-                implementation follows this pattern using the ChatGPT API.
+                <strong>Left</strong>: By analyzing the texts of large-scale pre-training datasets such as LAION-400M (<span style="color: #4b92c3">blue</span>) and LAION-2B (<span style="color: #ff983e">orange</span>), we show that 
+                these pre-training datasets exhibhit a long-tailed distribution for visual concepts defined in a variety of
+                downstream tasks. We sort the classes in each dataset according to their frequency in LAION-400M calculated by our 
+                concept frequency estimation method. 
+                <br/>
+                <br />
+                <strong>Right</strong>: We show that for zero-shot recognition, OpenCLIP models trained on LAION-400M (<span style="color: #4b92c3">blue</span>) and LAION-2B (<span style="color: #ff983e">orange</span>) respecitvely
+                yield per-class accuracies that strongly correlate with the long-tailed distribution of concept frequencies (binned on a log scale).
+                Interestingly, other VLMs such as CLIP (<span style="color: #de5252">red</span>) and MetaCLIP (<span style="color: #56b356">green</span>) (trained on private-data) also show similar imbalanced performance. This is presumably 
+                because all large-scale pretraining datasets follow similar long-tailed distributions. 
               </p>
             </div>
           </div>
@@ -190,229 +374,186 @@
 
 
   <!-- Text-Image generation -->
-  <section class="section hero is-light">
+  <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Optimizing Text-to-Image (T2I) Generation</h2>
+          <h2 class="title is-3">Multi-Modal Systems Fail on Rare Concepts</h2>
           <div class="content has-text-justified">
 
             <div class="item">
               <!-- Your image here -->
-              <img src="static/images/dalle3.png" alt="Image showing DALL-E 3 output" />
+              <!-- <img src="static/images/dalle3.png" alt="Image showing DALL-E 3 output" /> -->
+              <section class="hero is-small">
+                <div class="hero-body">
+                  <div class="container">
+                    <div id="results-carousel" class="carousel results-carousel">
+  
+                      <div class="item">
+  
+                        <!-- <div class="query-container">
+                          <p class="user-query">Tailed Frog</p>
+                        </div> -->
+  
+                        <!-- Image container -->
+                        <div class="images-container">
+  
+                          <div class="image-with-subtitle">
+                            <img src="static/images/tailed_frog_v3.png" alt="1" />
+                            <p class="subtitle-text">Tailed Frog</p>
+                          </div>
+  
+                        </div>
+  
+                      </div>
+  
+                      <div class="item">
+  
+                        <!-- <div class="query-container">
+                          <p class="user-query">Electric Ray</p>
+                        </div> -->
+  
+                        <!-- Image container -->
+                        <div class="images-container">
+  
+                          <div class="image-with-subtitle">
+                            <img src="static/images/electric_ray_v2.png" alt="1" />
+                            <p class="subtitle-text">Electric Ray</p>
+                          </div>
+  
+                        </div>
+  
+                      </div>
+  
+                      <div class="item">
+  
+                        <!-- <div class="query-container">
+                          <p class="user-query">BAE 146-200</p>
+                        </div> -->
+  
+                        <!-- Image container -->
+                        <div class="images-container">
+  
+                          <div class="image-with-subtitle">
+                            <img src="static/images/boe146200_v2.png" alt="1" />
+                            <p class="subtitle-text">BAE 146-200</p>
+                          </div>
+                      
+  
+                        </div>
+  
+                      </div>
+  
+  
+                      <div class="item">
+  
+                        <!-- <div class="query-container">
+                          <p class="user-query">Pan Flute</p>
+                        </div> -->
+  
+                        <!-- Image container -->
+                        <div class="images-container">
+  
+                          <div class="image-with-subtitle">
+                            <img src="static/images/pan_flute_v2.png" alt="1"  />
+                            <p class="subtitle-text">Pan Flute</p>
+                          </div>
+                        
+  
+                        </div>
+  
+                      </div>
+  
+  
+                      <div class="item">
+  
+                        <!-- <div class="query-container">
+                          <p class="user-query">Night Snake</p>
+                        </div> -->
+  
+                        <!-- Image container -->
+                        <div class="images-container">
+  
+                          <div class="image-with-subtitle">
+                            <img src="static/images/night_snake_v2.png" alt="1" />
+                            <p class="subtitle-text">Night Snake</p>
+                          </div>
+  
+                        </div>
+  
+                      </div>
+  
+                      <div class="item">
+  
+                        <!-- <div class="query-container">
+                          <p class="user-query">Longnose Gar</p>
+                        </div> -->
+  
+                        <!-- Image container -->
+                        <div class="images-container">
+  
+                          <div class="image-with-subtitle">
+                            <img src="static/images/longnose_gar_v2.png" alt="1" />
+                            <p class="subtitle-text">Longnose Gar</p>
+                          </div>
+                          
+  
+                        </div>
+  
+                      </div>
+  
+                      <div class="item">
+  
+                        <!-- <div class="query-container">
+                          <p class="user-query">Coral Fungus</p>
+                        </div> -->
+  
+                        <!-- Image container -->
+                        <div class="images-container">
+  
+                          <div class="image-with-subtitle">
+                            <img src="static/images/coral_fungus_v2.png" alt="1" />
+                            <p class="user-query">Coral Fungus</p>
+                          </div>
+  
+                        </div>
+  
+                      </div>
+  
+                      <div class="item">
+                        <!-- Image container -->
+                        <div class="images-container">
+  
+                          <div class="image-with-subtitle">
+                            <img src="static/images/hard_leaved_pocket_orchid_v2.png" alt="1" />
+                            <p class="user-query">Hard-leaved Pocket Orchid</p>
+                          </div>
+  
+                        </div>
+  
+                      </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+                    </div>
+                  </div>
+                </div>
+              </section>
 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                Using chat-based multimodal LLMs, we apply our framework to optimize prompts for the state-of-the-art
-                black-box generative VLM, DALL-E 3, using the multimodal GPT4-V. For complicated user queries that
-                DALL-E 3 may initially fail to generate, we send the generated image (highlighted in <span
-                  style="color: violet;">violet</span>) along with the current prompt to GPT4-V to ask for feedback on
-                improvements (highlighted in <span style="color: red;">red</span>) and then generate a new prompt
-                (highlighted in <span style="color: blue;">blue</span>). We show that such a simple framework is
-                surprisingly effective at correcting DALL-E 3 mistakes on some challenging Winoground text queries
-                that involve action, logical, and spatial reasoning. We open-source our code at <a
-                  href="https://github.com/shihongl1998/LLM-as-a-blackbox-optimizer" target="_blank"
-                  style="color: #0066cc; text-decoration: none;">this link</a>
-                to facilitate future research on AI-driven content generation.
+                Our analysis of LAION-400M and LAION-2B helps us identify visual concepts that are rare or infrequently under-represented
+                in the pre-training datasets of Vision Language models. Further, we show that state-of-the-art multi-modal systems including
+                <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, 
+                <a href="https://openai.com/dall-e-3">DALL-E 3</a>, and <a href="https://stablediffusionweb.com/">SD-XL</a> all fail to recognize or generate these rare concepts. More examples are shown in our paper.
               </p>
             </div>
 
-
-            <section class="hero is-small">
-              <div class="hero-body">
-                <div class="container">
-                  <div id="results-carousel" class="carousel results-carousel">
-
-                    <div class="item">
-
-                      <div class="query-container">
-                        <p class="user-query">The unmasked wrestler
-                          hits the masked wrestler.</p>
-                      </div>
-
-                      <!-- Image container -->
-                      <div class="images-container">
-
-                        <div class="image-with-subtitle">
-                          <img src="static/images/2-1-1.png" alt="1" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/2-1-n.png" alt="2" />
-                          <p class="subtitle-text">Optimized Image</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    <div class="item">
-
-                      <div class="query-container">
-                        <p class="user-query">The person with earrings pays the person without earrings.</p>
-                      </div>
-
-                      <!-- Image container -->
-                      <div class="images-container">
-
-                        <div class="image-with-subtitle">
-                          <img src="static/images/4-1-1.png" alt="1" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/4-1-n.png" alt="2" />
-                          <p class="subtitle-text">Optimized Image</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    <div class="item">
-
-                      <div class="query-container">
-                        <p class="user-query">A bird eats a snake.</p>
-                      </div>
-
-                      <!-- Image container -->
-                      <div class="images-container">
-
-                        <div class="image-with-subtitle">
-                          <img src="static/images/5-1-1.png" alt="1" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/5-1-n.png" alt="2" />
-                          <p class="subtitle-text">Optimized Image</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-
-                    <div class="item">
-
-                      <div class="query-container">
-                        <p class="user-query">A shorter person is covering the eyes of a taller person.</p>
-                      </div>
-
-                      <!-- Image container -->
-                      <div class="images-container">
-
-                        <div class="image-with-subtitle">
-                          <img src="static/images/308-1-1.png" alt="1" style="width: 1230px;" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/308-1-n.png" alt="2" />
-                          <p class="subtitle-text">Optimized Image</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-
-                    <div class="item">
-
-                      <div class="query-container">
-                        <p class="user-query">There is less milk than orange juice.</p>
-                      </div>
-
-                      <!-- Image container -->
-                      <div class="images-container">
-
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example2_init.png" alt="1" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example2_final.png" alt="2" />
-                          <p class="subtitle-text">Optimized Image</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    <div class="item">
-
-                      <div class="query-container">
-                        <p class="user-query">Getting a horse wet.</p>
-                      </div>
-
-                      <!-- Image container -->
-                      <div class="images-container">
-
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example6_init.png" alt="1" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example6_final.png" alt="2" />
-                          <p class="subtitle-text">Optimized Image</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    <div class="item">
-
-                      <div class="query-container">
-                        <p class="user-query">Some are parking in a train.</p>
-                      </div>
-
-                      <!-- Image container -->
-                      <div class="images-container">
-
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example7_init.png" alt="1" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example7_final.png" alt="2" />
-                          <p class="subtitle-text">Optimized Image</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    <div class="item">
-
-                      <div class="query-container">
-                        <p class="user-query">The white wall will soon be painted blue.</p>
-                      </div>
-
-                      <!-- Image container -->
-                      <div class="images-container">
-
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example8_init.png" alt="1" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example8_final.png" alt="2" />
-                          <p class="subtitle-text">Optimized Image</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-
-
-
-
-
-
-
-
-                  </div>
-                </div>
-              </div>
-            </section>
           </div>
         </div>
       </div>
@@ -426,24 +567,21 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Prompt Inversion using Chat-based Multimodal LLMs</h2>
+          <h2 class="title is-3">A novel prompting strategy: REAL-prompt</h2>
           <div class="content has-text-justified">
             <p>
-              Given a user-specified reference (query) image, our framework reverse-engineers the prompt to have DALL-E
-              generate the same object or scene in the query image. This enables users to easily make customizations,
-              such as having the character in a reference image perform various actions or change scenes.
+              To mitigate the imbalanced performance of VLMs we propose a novel prompting strategy, REAL-prompt, which 
+              replaces the given concept names with their most frequent synonyms and constructs prompts for zero-shot recognition. We display some
+              specific concepts from ImageNet, their most frequent synonyms, frequency (in LAION-400M), and their per-class accuracy. Clearly,
+              the simple change in prompts significantly improves zero-shot recognition. 
             </p>
+            <img src="static/images/synonyms_serif-v7-compressed.png" alt="Showcasing the efficiency of REAL-prompt."
+                style="height: auto; display: block; margin: 0 auto;">
             <div class="item">
               <!-- Your image here -->
-              <img src="static/images/dalle3_inversion_new.png" alt="Visualization of Prompt Inversion Process"
-                style="max-width: 95%; height: auto; display: block; margin: 0 auto;">
-
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                We apply our framework to reverse engineer the text prompt to generate the same user-queried image. We
-                send the generated image (highlighted in <span style="color: violet;">violet</span>) along with the
-                original image to GPT4-V to ask for feedback on improvements (highlighted in <span
-                  style="color: red;">red</span>) and then generate a new prompt (highlighted in <span
-                  style="color: blue;">blue</span>).
+                We show some tailed concepts where DALL-E 3 and SD-XL can fail to generate correct images when using the original concept name.
+                However using REAL-prompt, which uses the most frequent synonym to construct prompts, can help produce correct images.
               </p>
             </div>
 
@@ -455,275 +593,69 @@
                       <!-- Image container -->
                       <div class="images-container">
                         <div class="image-with-subtitle">
-                          <img src="static/images/rhino_original.png" alt="1" />
-                          <p class="subtitle-text">User Query</p>
+                          <img src="static/images/bank_swallow.png" alt="1" />
+                          <p class="subtitle-text" style="text-align: justify;">
+                            <strong>Bank Swallow</strong>, a small bird with brown back and white belly. When prompted with the original concept name (bank swallow), 
+                            both DALLE-3 and SD-XL generate incorrect images of birds with incorrect black backs. However, prompting with the most frequent synonym (sand martin) 
+                            guides both systems to produce correct images.
+                          </p>
                         </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/rhino_initial.png" alt="2" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/rhino_final.png" alt="3" />
-                          <p class="subtitle-text">Final Image</p>
-                        </div>
+                        
                       </div>
-                      <h2 class="subtitle has-text-centered">
-                        Create a digital artwork of a stylized, geometric rhinoceros head with a dynamic array of sharp,
-                        crystalline facets in a monochromatic palette of black, white, and gray. The design should
-                        feature intricate shadows and highlights to produce a three-dimensional illusion, with a focus
-                        on accurately representing the creature's contours and muscle structure. Adjust the composition
-                        to show the rhinoceros head from a frontal perspective, ensuring that both the horn and the ears
-                        are symmetrically aligned in the center. Emphasize the geometric nature of the facets by making
-                        them more pronounced and varied in shape, creating a complex mosaic that captures the interplay
-                        of light and shadow. Add a slight glow to the edges of the facets to enhance the
-                        three-dimensional effect and the metallic quality of the artwork. Display the rhinoceros head
-                        against a pitch-black background, with a light source positioned to cast dramatic, high-contrast
-                        illumination that emphasizes its multifaceted texture. Incorporate a subtle reflective sheen on
-                        the surface to suggest a sleek, metallic finish, and ensure the rhinoceros's eye is detailed and
-                        expressive, contributing to the overall lifelike appearance of the artwork.
-                      </h2>
+                      
                     </div>
 
                     <div class="item">
                       <!-- Image container -->
                       <div class="images-container">
                         <div class="image-with-subtitle">
-                          <img src="static/images/orange_original.png" alt="1" />
-                          <p class="subtitle-text">User Query</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/orange_initial.png" alt="2" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/orange_final.png" alt="3" />
-                          <p class="subtitle-text">Final Image</p>
+                          <img src="static/images/Thorn Apple.png" alt="1" />
+                          <p class="subtitle-text" style="text-align: justify;"><strong>Thorn Apple</strong>, a plant with large, white, trumpet-shaped flowers. When prompted with the original concept name(thorn apple),
+                            DALLE-3 generates an image with sharp thorns along its stem. Even worse, SD-XL takes the names superficially and generates an apple with thorns. On the contrary, prompting with the most frequent synonym (datura) leads to correct images in both systems.</p>
                         </div>
                       </div>
-                      <h2 class="subtitle has-text-centered">
-                        A hyper-realistic full slice of an orange with intricate details, including the textured pulp
-                        and clearly defined rind, positioned off-center on a reflective gradient surface transitioning
-                        from white to dark. The orange's juicy texture is accentuated by a dynamic splash of juice, with
-                        droplets captured mid-air, creating an energetic and lively scene. The lighting is dramatic and
-                        contrasting, with a spotlight effect casting a pronounced shadow to one side to enhance the
-                        three-dimensional effect and emphasize the vibrant orange color. Include a clear reflection on
-                        the surface and a small stem attached to the orange slice to underscore the realism and
-                        freshness. Enhance the composition by ensuring the orange slice is angled slightly, with the
-                        splash of juice originating from the lower right side, to add a sense of motion and vitality.
-                      </h2>
                     </div>
 
                     <div class="item">
                       <!-- Image container -->
                       <div class="images-container">
                         <div class="image-with-subtitle">
-                          <img src="static/images/knight_original.png" alt="1" />
-                          <p class="subtitle-text">User Query</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/knight_initial.png" alt="2" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/knight_final.png" alt="3" />
-                          <p class="subtitle-text">Final Image</p>
+                          <img src="static/images/Pocket Orchid.png" alt="1" />
+                          <p class="subtitle-text" style="text-align: justify;"><strong>Hard Leaved Pocket Orchid</strong>, a type of orchid with a distinctive pouch and symmetrical large petals. When prompted with the original conceptname(hard leaved pocket orchid),
+                            both DALLE-3 and SD-XL generate incorrect images (note the missing pocket and shape of the petals). However, when prompted with the most frequent synonym (Paphiopedilum micranthum), 
+                            DALLE-3 produces the correct image. In contrast, SD-XL is able to recover the shape of petals but still misses the pocket.</p>
                         </div>
                       </div>
-                      <h2 class="subtitle has-text-centered">
-                        A medieval knight in full armor stands with a shield, the dark background highlighting his
-                        silhouette against a subtle warm glow. His helmet features a visor with a single vertical slit,
-                        and his armor includes a chainmail coif beneath a segmented plate gorget and articulated plate
-                        gauntlets, with layered plate armor and flared ridged pauldrons. The knight's shield is centered
-                        and bears a detailed, embossed golden fleur-de-lis on a field of weathered steel, surrounded by
-                        rivets. The vibrant orange cloak drapes over both shoulders and behind his back, adding a touch
-                        of regal color to the composition. His stance is grounded and balanced, with his left arm
-                        extended, presenting the shield, and his right hand resting on the pommel of his sword, exuding
-                        a calm and noble demeanor.
-                      </h2>
                     </div>
 
                     <div class="item">
                       <!-- Image container -->
                       <div class="images-container">
                         <div class="image-with-subtitle">
-                          <img src="static/images/dove_original.png" alt="1" />
-                          <p class="subtitle-text">User Query</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/dove_initial.png" alt="2" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/dove_final.png" alt="3" />
-                          <p class="subtitle-text">Final Image</p>
+                          <img src="static/images/aeroplane.png" alt="1" />
+                          <p class="subtitle-text" style="text-align: justify;"><strong>BAE 146-200</strong>,
+                            an airplane with 4 engines.When prompted with the original concept name (BAE 146-200), both DALLE-3 and SD-XL fail by generating only 2 engines. DALL-E 3 also mistakenly generate extra wings sometimes!
+                            However, when prompted with the most frequent synonym (avro rj85), both are able to generate correct images with 4 engines.</p>
                         </div>
                       </div>
-                      <h2 class="subtitle has-text-centered">
-                        Create a stylized illustration of a dove in flight, with feathers that transition smoothly
-                        through a spectrum of colors including red, orange, yellow, green, blue, indigo, and violet. The
-                        dove's plumage should resemble a dynamic, three-dimensional arrangement of vibrant, overlapping
-                        feathers, giving a sense of movement and freedom. The style should be a fusion of semi-realistic
-                        and digital art, with a focus on vivid colors and a clean, light background that emphasizes the
-                        artwork's lively and spirited nature. Adjust the feather arrangement to be more structured and
-                        flame-like, with the feathers at the tips being more elongated and pointed to enhance the sense
-                        of elegance and flow.
-                      </h2>
                     </div>
 
                     <div class="item">
                       <!-- Image container -->
                       <div class="images-container">
                         <div class="image-with-subtitle">
-                          <img src="static/images/dino_original.png" alt="1" />
-                          <p class="subtitle-text">User Query</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/dino_initial.png" alt="2" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/dino_final.png" alt="3" />
-                          <p class="subtitle-text">Final Image</p>
+                          <img src="static/images/keyboard.png" alt="1" />
+                          <p class="subtitle-text" style="text-align: justify;">keyboard space bar,
+                            a long bar at the bottom of a computer keyboard. When prompted with the original concept name (keyboard space bar), 
+                            both DALLE-3 and SD-XL fail by focusing on generating images of the keyboard. However, when prompted with the most frequent synonyms (space bar), both are able to generate correct images.</p>
                         </div>
                       </div>
-                      <h2 class="subtitle has-text-centered">
-                        Create an illustration of a stylized, geometric dinosaur with a textured body in two shades of
-                        green: a lighter green for the main body and a darker green for the spiky plates along its back.
-                        The dinosaur should have a friendly demeanor, with a long, curved tail and a smooth, rounded
-                        head featuring two small, circular white eyes with black pupils. It should stand on two legs
-                        with small, rounded feet, each with three visible toes. The background should be a flat, light
-                        beige color, with a simple, elongated shadow extending to the right of the dinosaur, indicating
-                        a soft light source to the left.
-                      </h2>
                     </div>
-
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example3_original.png" alt="1" />
-                          <p class="subtitle-text">User Query</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example3_init.png" alt="2" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example3_final.png" alt="3" />
-                          <p class="subtitle-text">Final Image</p>
-                        </div>
-                      </div>
-                      <h2 class="subtitle has-text-centered">
-                        Generate an image of a cartoon-style polar bear with gleefully closed eyes and a wide, toothy
-                        grin, revealing just a hint of its tongue. The bear should look exuberant, standing on its hind
-                        legs with arms open wide as if ready for a hug. The bear's fur should appear extremely soft and
-                        fluffy, with a pronounced blush of rosy pink on both cheeks and belly, enhancing its charm.
-                        Adorn the bear with a cozy, chunky-knit scarf, vibrant red with prominent, horizontal white
-                        stripes, stylishly wrapped around its neck and draping with a dense tassel fringe at the ends.
-                        Situate the bear against a gentle pastel pink backdrop, scattered with delicate, small
-                        snowflakes, conveying the splendor and coziness of festive winter cheer.
-                      </h2>
-                    </div>
-
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example5_original.png" alt="1" />
-                          <p class="subtitle-text">User Query</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example5_init.png" alt="2" />
-                          <p class="subtitle-text">Initial Image</p>
-                        </div>
-                        <div class="image-with-subtitle">
-                          <img src="static/images/show_example5_final.png" alt="3" />
-                          <p class="subtitle-text">Final Image</p>
-                        </div>
-                      </div>
-                      <h2 class="subtitle has-text-centered">
-                        An anthropomorphic duck standing confidently with hands on hips, styled as a classic film noir
-                        detective. The duck has a calm and cool expression, wearing a tan detective's fedora hat and a
-                        matching double-breasted trench coat, buttoned up, with a broad collar, epaulets, and a belted
-                        waist. The character has a white shirt and a patterned tie with a diagonal stripe design
-                        underneath. The character has orange webbed feet and a large, prominent beak. The lighting is
-                        dramatic, with a strong contrast between light and shadow, creating a focused shadow on the
-                        background that mimics the character's silhouette. The overall color palette is warm with a
-                        gentle light source coming from the side, casting the background in a gradient from warm beige
-                        to shadows, giving the image a mysterious and dramatic appearance.
-                      </h2>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
-
-            <table>
-              <h3 class="subtitle has-text-centered">
-                Image customization based on inverted images 
-              </h3>
-              <tr>
-                <th>User Query</th>
-                <th>Inverted Image</th>
-                <th>Example 1</th>
-                <th>Example 2</th>
-                <th>Example 3</th>
-                <th>Example 4</th>
-                <th>Example 5</th>
-              </tr>
-              <tr>
-                <td><img src="static/images/shiba_original.png" alt="User Query Image"></td>
-                <td><img src="static/images/shiba_final.png" alt="Inverted Image"></td>
-                <td>
-                  <img src="static/images/shiba_give_the_dog_a_cat_friend.png" alt="Example 1">
-                  <div class="caption">Give the dog a cat friend.</div>
-                </td>
-                <td>
-                  <img src="static/images/shiba_make_the_dog_be_in_the_middle_of_a_jump.png" alt="Example 2">
-                  <div class="caption">Make the dog be in the middle of a jump.</div>
-                </td>
-                <td>
-                  <img src="static/images/shiba_make_the_dog_do_a_handstand.png" alt="Example 3">
-                  <div class="caption">Make the dog do a handstand.</div>
-                </td>
-                <td>
-                  <img src="static/images/shiba_make_the_dog_lie_down_on_its_side.png" alt="Example 4">
-                  <div class="caption">Make the dog lie down on its side.</div>
-                </td>
-                <td>
-                  <img src="static/images/shiba_make_the_dog_swim_in_water.png" alt="Example 5">
-                  <div class="caption">Make the dog swim in water.</div>
-                </td>
-              </tr>
-              <!-- Repeat the row structure for each additional set of queries and images -->
-              <tr>
-                <td><img src="static/images/owl_original.png" alt="User Query Image"></td>
-                <td><img src="static/images/owl_final.png" alt="Inverted Image"></td>
-                <td>
-                  <img src="static/images/owl_make_the_owl_fight_a_hawk.png" alt="Example 1">
-                  <div class="caption">Make the owl fight a hawk.</div>
-                </td>
-                <td>
-                  <img src="static/images/owl_make_the_owl_flap_its_wings.png" alt="Example 2">
-                  <div class="caption">Make the owl flap its wings.</div>
-                </td>
-                <td>
-                  <img src="static/images/owl_make_the_owl_fully_green.png" alt="Example 3">
-                  <div class="caption">Make the owl fully green.</div>
-                </td>
-                <td>
-                  <img src="static/images/owl_make_the_owl_stand_in_front_of_the_moon.png" alt="Example 4">
-                  <div class="caption">Make the owl stand in front of the moon.</div>
-                </td>
-                <td>
-                  <img src="static/images/owl_make_the_owl_walk_in_the_city.png" alt="Example 5">
-                  <div class="caption">Make the owl walk in the city.</div>
-                </td>
-              </tr>
-              <p>
-
-              </p>
-            </table>
 
           </div>
         </div>
@@ -733,31 +665,22 @@
   <!-- End Prompt Inversion -->
 
   <!-- Quantitative Results -->
-  <section class="section hero is-light">
+  <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Comparison of our method with other baselines on one-shot classification tasks.</h2>
+          <h2 class="title is-3">A lightweight retrieval-augmented solution: REAL-Linear</h2>
           <div class="content has-text-justified">
-
+            <p>
+              To further improve the zero-shot recognition performance of VLMs, we propose REAL-Linear, a lightweight yet powerful retrieval augmented solution. First, REAL-Linear uses all synonyms of 
+              the given concepts to retrieve class-balanced subset of pretraining images (e.g., 500 images per class from the
+              dataset LAION-400M). Next, it learns a linear classifier <strong>W</strong> atop the frozen VLM using cross-modal adaptation, and then 
+              ensembles it with the off-the shelf classifier <strong>W<sub>zs</sub></strong>, whose weights are
+              text prompt embeddings based on the most frequent synonyms. 
+            </p>
             <div class="item">
               <!-- Your image here -->
-              <img src="static/images/table.png" alt="Image showing DALL-E 3 output" />
-
-              <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                We report the average accuracy of each method across three folds, optimized using 1-shot training sets.
-                We bold the best black-box result for each dataset, and underline the second best result. First, we note
-                that our approach can effectively improve upon the initial prompts selected from LAIONCOCO-1M from 56%
-                to 61%. Our approach is also competitive against the best Human-Engineered prompts released by OpenAI
-                searched using test set performance. Additionally, we show that using both positive and negative
-                prompts improves the overall accuracy by 1%. For reference, we report oracle white-box approaches in
-                gray. Remarkably, we also surpass white-box solutions such as WiSE-FT and CoOp by 1.5%. These
-                methods require either gradient-based fine-tuning (CoOp/WiSE-FT/Cross-Modal) or prompt ensembling using
-                output logits (DCLIP). While our approach is less effective than the SOTA white-box method (Cross-Modal
-                Adaptation), we stress that our black-box setup is significantly more challenging, because we restrict
-                the optimization space to natural language and do not access the pre-trained weights, model
-                architectures, feature embeddings, and output logits of VLMs.
-              </p>
+              <img src="static/images/real_linear_final_new.png" alt="Image showing DALL-E 3 output" />
             </div>
           </div>
         </div>
@@ -771,70 +694,50 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Example resulting templates on each dataset.</h2>
+          <h2 class="title is-3">Benchmarking of REAL</h2>
           <div class="content has-text-justified">
 
             <div class="item">
               <!-- Your image here -->
-
-              <table>
-                <tr>
-                  <th>Dataset</th>
-                  <th>Example of Top Templates</th>
-                </tr>
-                <tr>
-                  <td>Caltech </td>
-                  <td>An image of a {} with a <strong>blurred</strong> background that emphasizes the subject</td>
-                </tr>
-                <tr>
-                  <td>DTD </td>
-                  <td>The essential elements of {} are <strong>amplified with visual simplicity</strong></td>
-                </tr>
-                <tr>
-                  <td>EuroSAT</td>
-                  <td>A <strong>top-down</strong> view of {} arranged in a pattern {}</td>
-                </tr>
-                <tr>
-                  <td>Aircraft</td>
-                  <td>A clear, high-quality image of a single {} with a <strong>white background</strong> </td>
-                </tr>
-                <tr>
-                  <td>Food</td>
-                  <td>A {} featuring diverse <strong>cuisine</strong> and ingredients</td>
-                </tr>
-                <tr>
-                  <td>ImageNet</td>
-                  <td>An image of a {} with bright and <strong>natural lighting</strong></td>
-                </tr>
-                <tr>
-                  <td>Flowers</td>
-                  <td>A clear and <strong>vivid</strong> photograph of the {} in its <strong>natural setting</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Pets</td>
-                  <td>A {} with distinct and <strong>recognizable</strong> characteristics</td>
-                </tr>
-                <tr>
-                  <td>Cars</td>
-                  <td>A {} featuring a wide range of <strong>color options</strong> for easy selection</td>
-                </tr>
-                <tr>
-                  <td>SUN</td>
-                  <td>A high-resolution photo of a {} with clear background and natural <strong>lighting</strong></td>
-                </tr>
-                <tr>
-                  <td>UCF</td>
-                  <td>A black and white photo of a {} <strong>in motion</strong></td>
-                </tr>
-              </table>
-
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                Although we do not provide ChatGPT with any information regarding the targeted dataset, we observe that
-                the resulting templates are remarkably similar to human-engineered templates, with many domain-specific
-                details such as “motion” and “cuisine”, and stylistic elements such as “bright and natural lighting”.
+                Within the zero-shot prompting paradigm, our REAL-Prompt outperforms existing prompting approaches such as DCLIP, and CUPL. 
+                We also compare with some baseline prompt templates for reference. Next we show that our REAL-Linear rivals the recent method REACT, 
+                and importantly only uses only 5% of retrieved images and 1% of its compute. We highlight the best accuracy in bold and underline the second best numbers.
               </p>
             </div>
+
+            <section class="hero is-small">
+              <div class="hero-body">
+                <div class="container">
+                  <div id="results-carousel" class="carousel results-carousel">
+                    <div class="item">
+                      <!-- Image container -->
+                      <div class="images-container">
+                        <div class="image-with-subtitle">
+                          <img src="static/images/real-benchmark.png" alt="1" style="height: 200px;" />
+                          <p class="subtitle-text" style="text-align: center;">
+                            <strong>REAL outperforms existing methods on standard zero-shot recognition datasets</strong>
+                          </p>
+                        </div>
+                        
+                      </div>
+                      
+                    </div>
+
+                    <div class="item">
+                      <!-- Image container -->
+                      <div class="images-container">
+                        <div class="image-with-subtitle">
+                          <img src="static/images/real_linear_efficient.png" alt="1" style="height: 200px;"/>
+                          <p class="subtitle-text" style="text-align: justify;"><strong>REAL requires a fraction of compute compared to previos state-of-the-art.</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
           </div>
         </div>
       </div>
