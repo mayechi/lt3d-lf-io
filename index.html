@@ -144,13 +144,13 @@
             </p>
             <ul>
               <li>
-                <strong>Estimating Concept Frequency using Large Language Models (LLMs):</strong> 
+                <strong>Estimating Concept Frequency Using Large Language Models (LLMs):</strong> 
                 We use an LLM to help count relevant texts that contain synonyms of the given concepts and resolve ambiguous cases,
                 confirming that popular VLM datasets like LAION exhibit a long-tailed 
                 concept distribution.
               </li>
               <li>
-                <strong>Long-tailed behaviors of all mainstream VLMs:</strong> VLMs (CLIP, OpenCLIP, MetaCLIP), multimodal chatbots (GPT-4V, LLaVA), and text-to-image models (DALLE-3, SD-XL) 
+                <strong>Long-tailed Behaviors of All Mainstream VLMs:</strong> VLMs (CLIP, OpenCLIP, MetaCLIP), multimodal chatbots (<a href="https://openai.com/research/gpt-4v-system-card">GPT-4V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>), and text-to-image models (<a href="https://openai.com/dall-e-3">DALLE-3</a>, <a href="https://stablediffusionweb.com/">SD-XL</a>) 
                 struggle with recognizing and generating rare concepts identified by our method.
               </li>
               <li>
@@ -745,48 +745,23 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-4">Benchmarking REAL</h2>
-          <div class="content has-text-justified">
+          <div class="content">
 
             <div class="item">
               <!-- Your image here -->
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                Within the zero-shot prompting paradigm, our REAL-Prompt outperforms existing prompting approaches such as DCLIP, and CUPL. 
-                Next we show that our REAL-Linear rivals the recent method REACT, 
-                and importantly only uses only 5% of retrieved images and 1% of its compute. We highlight the best accuracy in bold and underline the second best numbers.
+                Within the zero-shot prompting paradigm, our REAL-Prompt outperforms existing prompting approaches such as <a href="https://arxiv.org/abs/2210.07183">DCLIP</a>, and <a href="https://arxiv.org/abs/2209.03320">CuPL</a>. 
+                Next we show that our REAL-Linear rivals the recent retrieval augmented method <a href="https://react-vl.github.io/">REACT</a>. Best numbers highlighted in bold, second best underlined.
               </p>
+              <img src="static/images/real-benchmark.png" alt="Image showing DALL-E 3 output" />
             </div>
-
-            <section class="hero is-small">
-              <div class="hero-body">
-                <div class="container">
-                  <div id="results-carousel" class="carousel results-carousel">
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/real-benchmark.png" alt="1" style="height: 200px;" />
-                          <p class="subtitle-text" style="text-align: center;">
-                            <strong>REAL outperforms existing methods on standard zero-shot recognition datasets</strong>
-                          </p>
-                        </div>
-                        
-                      </div>
-                      
-                    </div>
-
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/real_linear_efficient.png" alt="1" style="height: 200px;"/>
-                          <p class="subtitle-text" style="text-align: justify;"><strong>REAL requires a fraction of compute compared to previos state-of-the-art.</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <div class="item">
+              <!-- Your image here -->
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;"> 
+                We show that for ImageNet REAL-Linear only uses <strong>5%</strong> of retrieved images and <strong>1%</strong> of compute as compared to recent state-of-the-art REACT.
+              </p>
+              <img src="static/images/real_linear_efficient.png" alt="Image showing DALL-E 3 output" style="height: 200px;"/>
+            </div>
 
           </div>
         </div>
@@ -796,7 +771,7 @@
   <!-- End Qualitative Results -->
 
   <!--BibTex citation -->
-  <section class="section hero is-light2" id="BibTeX">
+  <section class="section hero is-light" id="BibTeX">
     <div class="container is-max-desktop content ">
       <h2 class="title">BibTeX</h2>
       <pre><code>@misc{liu2023language,
