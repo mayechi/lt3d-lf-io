@@ -130,7 +130,7 @@
   </section>
 
   <!-- Paper abstract -->
-  <section class="section hero is-light2">
+  <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
@@ -139,12 +139,33 @@
             <p style="text-align: justify;">
               Vision-language models (VLMs) such as CLIP excel in zero-shot recognition but 
               exhibit drastically imbalanced performance across visual concepts in downstream 
-              tasks. For example, despite an impressive mean zero-shot accuracy on ImageNet 
-              (72.7%), CLIP yields less than 10% on 10 concepts (e.g., tailed frog and night 
-              snake), presumably because these concepts are under-represented in VLMs' 
-              imbalanced pretraining datasets. Yet, assessing this imbalance is challenging, 
-              as calculating the frequency of specific concepts within large-scale pretraining 
-              data is not straightforward. In this work, we make the first attempt to measure 
+              tasks. Despite high zero-shot accuracy on ImageNet (72.7%), CLIP performs poorly (&lt;10%) on certain concepts like tailed frog and night snake, 
+              likely due to underrepresentation in VLM pretraining datasets. Assessing this imbalance is complex due to the difficulty in calculating concept frequency in large-scale pre-training data. 
+            </p>
+            <ul>
+              <li>
+                <strong>Estimating Concept Frequency using Large Language Models (LLMs):</strong> 
+                We use an LLM to help count relevant texts that contain synonyms of the given concepts and resolve ambiguous cases,
+                confirming that popular VLM datasets like LAION exhibit a long-tailed 
+                concept distribution.
+              </li>
+              <li>
+                <strong>Long-tailed behaviors of all mainstream VLMs:</strong> VLMs (CLIP, OpenCLIP, MetaCLIP), multimodal chatbots (GPT-4V, LLaVA), and text-to-image models (DALLE-3, SD-XL) 
+                struggle with recognizing and generating rare concepts identified by our method.
+              </li>
+              <li>
+                <strong>REtrieval Augmented Learning (REAL) achieves SOTA zero-shot performance:</strong>  
+                With REAL, we propose two solutions, one a zero-shot prompting solution (REAL-Prompt) and a retrieval augmented solution (REAL-Linear)
+                <ul>
+                  <li><strong>REAL-Prompt:</strong> REAL-prompt surpasses prior art over nine benchmarks by simply prompting VLMs with the most frequent synonym 
+                  of downstream concept names in pre-training texts. 
+                  <li><strong>REAL-Linear:</strong> REAL-Linear retrieves a small, class-balanced 
+                  set of pretraining data to train a robust classifier rivaling recent state-of-the-art REACT, using <strong>400x</strong> less storage and <strong>10,000x</strong> 
+                  less training time!</li>
+                </ul>
+              </li>
+            </ul>  
+              <!-- In this work, we make the first attempt to measure 
               the concept frequency in VLMs' pretraining data by analyzing pretraining 
               texts. We use off-the-shelf language models to help count relevant texts that 
               contain synonyms of the given concepts and resolve ambiguous cases. Our analysis 
@@ -161,8 +182,8 @@
               Second, REAL uses all the concept synonyms to retrieve a small, class-balanced 
               set of pretraining data to train a robust classifier. REAL surpasses the recent 
               retrieval-augmented solution REACT, using 400 times less storage and 10,000 
-              times less training time!
-            </p>
+              times less training time! -->
+            <!-- </p> -->
           
           </div>
         </div>
@@ -172,12 +193,37 @@
   <!-- End paper abstract -->
 
 
-  <!-- Method Overview -->
   <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Strong Correlation of Concept Frequency and Accuracy</h2>
+          <h2 class="title is-3">Our Method Of Frequency Measure</h2>
+          <!-- <h2 class="title is-4">Strong Correlation of Concept Frequency and Accuracy</h2> -->
+          <div class="content has-text-justified">
+
+            <div class="item">
+              <!-- Your image here -->
+              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
+              <img src="static/images/tiger.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                We measure frequency of a given concept in the pre-training data of VLMs, using an LLM our method as demonstrated above. 
+              </p>
+              <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
+                style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method Overview -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Our Findings</h2>
+          <h2 class="title is-4">Strong Correlation of Concept Frequency and Accuracy</h2>
           <div class="content has-text-justified">
 
             <div class="item">
@@ -355,14 +401,12 @@
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
                 <strong>Left</strong>: By analyzing the texts of large-scale pre-training datasets such as LAION-400M (<span style="color: #4b92c3">blue</span>) and LAION-2B (<span style="color: #ff983e">orange</span>), we show that 
                 these pre-training datasets exhibhit a long-tailed distribution for visual concepts defined in a variety of
-                downstream tasks. We sort the classes in each dataset according to their frequency in LAION-400M calculated by our 
-                concept frequency estimation method. 
+                downstream tasks.  
                 <br/>
                 <br />
                 <strong>Right</strong>: We show that for zero-shot recognition, OpenCLIP models trained on LAION-400M (<span style="color: #4b92c3">blue</span>) and LAION-2B (<span style="color: #ff983e">orange</span>) respecitvely
                 yield per-class accuracies that strongly correlate with the long-tailed distribution of concept frequencies (binned on a log scale).
-                Interestingly, other VLMs such as CLIP (<span style="color: #de5252">red</span>) and MetaCLIP (<span style="color: #56b356">green</span>) (trained on private-data) also show similar imbalanced performance. This is presumably 
-                because all large-scale pretraining datasets follow similar long-tailed distributions. 
+                Interestingly, other VLMs such as CLIP (<span style="color: #de5252">red</span>) and MetaCLIP (<span style="color: #56b356">green</span>) (trained on private-data) also show similar imbalanced performance. 
               </p>
             </div>
           </div>
@@ -374,11 +418,11 @@
 
 
   <!-- Text-Image generation -->
-  <section class="section hero is-light2">
+  <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Multi-Modal Systems Fail on Rare Concepts</h2>
+          <h2 class="title is-4">Multi-Modal Systems Fail on Rare Concepts</h2>
           <div class="content has-text-justified">
 
             <div class="item">
@@ -547,7 +591,7 @@
               </section>
 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                Our analysis of LAION-400M and LAION-2B helps us identify visual concepts that are rare or infrequently under-represented
+                Our analysis of LAION-400M and LAION-2B helps us identify visual concepts that under-represented
                 in the pre-training datasets of Vision Language models. Further, we show that state-of-the-art multi-modal systems including
                 <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, 
                 <a href="https://openai.com/dall-e-3">DALL-E 3</a>, and <a href="https://stablediffusionweb.com/">SD-XL</a> all fail to recognize or generate these rare concepts. More examples are shown in our paper.
@@ -567,24 +611,26 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">A novel prompting strategy: REAL-prompt</h2>
+          <h2 class="title is-3">Solutions</h2>
           <div class="content has-text-justified">
             <p>
-              To mitigate the imbalanced performance of VLMs we propose a novel prompting strategy, REAL-prompt, which 
-              replaces the given concept names with their most frequent synonyms and constructs prompts for zero-shot recognition. We display some
-              specific concepts from ImageNet, their most frequent synonyms, frequency (in LAION-400M), and their per-class accuracy. Clearly,
-              the simple change in prompts significantly improves zero-shot recognition. 
+              To mitigate the imbalanced performance of VLMs we propose a novel prompting solution (REAL-Prompt) and a retrieval augmented strategy
+              REAL-Linear.
             </p>
+          </div>
+          <h2 class="title is-4">REAL-prompt</h2>
+          <div class="content has-text-justified">
             <img src="static/images/synonyms_serif-v7-compressed.png" alt="Showcasing the efficiency of REAL-prompt."
-                style="height: auto; display: block; margin: 0 auto;">
-            <div class="item">
-              <!-- Your image here -->
-              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                We show some tailed concepts where DALL-E 3 and SD-XL can fail to generate correct images when using the original concept name.
-                However using REAL-prompt, which uses the most frequent synonym to construct prompts, can help produce correct images.
+                style="height: auto; display: block; margin: 10px;">
+              <p>
+                  REAL-prompt replaces the given concept names with their most frequent synonyms (in the pre-training data of VLMs) and constructs prompts for zero-shot recognition. We display some
+                  specific concepts from ImageNet, their most frequent synonyms, frequency (in LAION-400M), and their per-class accuracy. Clearly,
+                  the simple change in prompts significantly improves zero-shot recognition. 
               </p>
-            </div>
-
+              <div class="item">
+                <!-- Your image here -->
+                
+              </div>
             <section class="hero is-small">
               <div class="hero-body">
                 <div class="container">
@@ -654,9 +700,15 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              
             </section>
-
+            <div class="item">
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                We show some tailed concepts where DALL-E 3 and SD-XL can fail to generate correct images when using the original concept name.
+                However using REAL-prompt, which uses the most frequent synonym to construct prompts, can help produce correct images.
+              </p>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -669,19 +721,17 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">A lightweight retrieval-augmented solution: REAL-Linear</h2>
+          <h2 class="title is-4">REAL-Linear</h2>
           <div class="content has-text-justified">
-            <p>
-              To further improve the zero-shot recognition performance of VLMs, we propose REAL-Linear, a lightweight yet powerful retrieval augmented solution. First, REAL-Linear uses all synonyms of 
-              the given concepts to retrieve class-balanced subset of pretraining images (e.g., 500 images per class from the
-              dataset LAION-400M). Next, it learns a linear classifier <strong>W</strong> atop the frozen VLM using cross-modal adaptation, and then 
-              ensembles it with the off-the shelf classifier <strong>W<sub>zs</sub></strong>, whose weights are
-              text prompt embeddings based on the most frequent synonyms. 
-            </p>
             <div class="item">
               <!-- Your image here -->
               <img src="static/images/real_linear_final_new.png" alt="Image showing DALL-E 3 output" />
             </div>
+            <p>
+              To further improve the zero-shot recognition performance of VLMs, we propose REAL-Linear, a lightweight yet powerful retrieval augmented solution. REAL-Linear uses all synonyms of 
+              the given concepts to retrieve class-balanced subset of pretraining images (e.g., 500 images per class from the
+              dataset LAION-400M). The steps have been demonstrated above. 
+            </p>
           </div>
         </div>
       </div>
@@ -694,14 +744,14 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Benchmarking of REAL</h2>
+          <h2 class="title is-4">Benchmarking REAL</h2>
           <div class="content has-text-justified">
 
             <div class="item">
               <!-- Your image here -->
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
                 Within the zero-shot prompting paradigm, our REAL-Prompt outperforms existing prompting approaches such as DCLIP, and CUPL. 
-                We also compare with some baseline prompt templates for reference. Next we show that our REAL-Linear rivals the recent method REACT, 
+                Next we show that our REAL-Linear rivals the recent method REACT, 
                 and importantly only uses only 5% of retrieved images and 1% of its compute. We highlight the best accuracy in bold and underline the second best numbers.
               </p>
             </div>
@@ -746,8 +796,8 @@
   <!-- End Qualitative Results -->
 
   <!--BibTex citation -->
-  <section class="section hero is-light" id="BibTeX">
-    <div class="container is-max-desktop content">
+  <section class="section hero is-light2" id="BibTeX">
+    <div class="container is-max-desktop content ">
       <h2 class="title">BibTeX</h2>
       <pre><code>@misc{liu2023language,
         title={Language Models as Black-Box Optimizers for Vision-Language Models}, 
