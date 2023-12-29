@@ -64,15 +64,15 @@
                 <a target="_blank">Tian Liu</a><sup>*</sup><sup>1</sup>,</span>
               <span class="author-block">
                 <a target="_blank">Xiangjue Dong</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a target="_blank">Tiffany Ling</a><sup>2</sup>,</span>
+              <!-- <span class="author-block">
+                <a target="_blank">Tiffany Ling</a><sup>2</sup>,</span> -->
               <span class="author-block">
                 <a target="_blank">Yanan Li</a><sup>4</sup>,</span>
               <span class="author-block">
-                <a target="_blank">James Caverlee</a><sup>1</sup>
+                <a target="_blank">Deva Ramanan</a><sup>2</sup>
               </span>
               <span class="author-block">
-                <a target="_blank">Deva Ramanan</a><sup>2</sup>
+                <a target="_blank">James Caverlee</a><sup>1</sup>
               </span>
               <span class="author-block">
                 <a target="_blank">Shu Kong</a><sup>1</sup><sup>,</sup><sup>3</sup>
@@ -150,18 +150,17 @@
                 concept distribution.
               </li>
               <li>
-                <strong>Long-tailed Behaviors of All Mainstream VLMs:</strong> VLMs (CLIP, OpenCLIP, MetaCLIP), multimodal chatbots (<a href="https://openai.com/research/gpt-4v-system-card">GPT-4V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>), and text-to-image models (<a href="https://openai.com/dall-e-3">DALLE-3</a>, <a href="https://stablediffusionweb.com/">SD-XL</a>) 
+                <strong>Long-tailed Behaviors Of All Mainstream VLMs:</strong> VLMs (CLIP, OpenCLIP, MetaCLIP), visual chatbots (<a href="https://openai.com/research/gpt-4v-system-card">GPT-4V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>), and text-to-image models (<a href="https://openai.com/dall-e-3">DALLE-3</a>, <a href="https://stablediffusionweb.com/">SD-XL</a>) 
                 struggle with recognizing and generating rare concepts identified by our method.
               </li>
               <li>
-                <strong>REtrieval Augmented Learning (REAL) achieves SOTA zero-shot performance:</strong>  
-                With REAL, we propose two solutions, one a zero-shot prompting solution (REAL-Prompt) and a retrieval augmented solution (REAL-Linear)
+                <strong>REtrieval Augmented Learning (REAL) Achieves SOTA Zero-Shot Performance:</strong>  
+                We propose two solutions to boost zero-shot performance over both tail and head classes, without leveraging downstream data.
                 <ul>
-                  <li><strong>REAL-Prompt:</strong> REAL-prompt surpasses prior art over nine benchmarks by simply prompting VLMs with the most frequent synonym 
-                  of downstream concept names in pre-training texts. 
-                  <li><strong>REAL-Linear:</strong> REAL-Linear retrieves a small, class-balanced 
-                  set of pretraining data to train a robust classifier rivaling recent state-of-the-art REACT, using <strong>400x</strong> less storage and <strong>10,000x</strong> 
-                  less training time!</li>
+                  <li><strong>REAL-Prompt:</strong>  We prompt VLMs with the most frequent synonym of a downstream concept (e.g., "ATM" instead of "cash machine"). 
+                  This simple change outperforms other ChatGPT-based prompting methods such as DCLIP and CuPL.
+                  <li><strong>REAL-Linear:</strong> REAL-Linear retrieves a small, class-balanced set of pretraining data from LAION to train a robust linear classifier, 
+                  surpassing recent state-of-the-art REACT, using <strong>400x</strong> less storage and <strong>10,000x</strong> less training time!</li>
                 </ul>
               </li>
             </ul>  
@@ -197,7 +196,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Our Method Of Frequency Measure</h2>
+          <h2 class="title is-3">Measuring Concept Frequency in Pretraining Data</h2>
           <!-- <h2 class="title is-4">Strong Correlation of Concept Frequency and Accuracy</h2> -->
           <div class="content has-text-justified">
 
@@ -206,7 +205,7 @@
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
               <img src="static/images/tiger.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                We measure frequency of a given concept in the pre-training data of VLMs, using an LLM our method as demonstrated above. 
+                We use LLMs such as ChatGPT to help count texts relevant to the concept of interest, as visually illustrated above for the concept of "tiger".
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -223,7 +222,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3">Our Findings</h2>
-          <h2 class="title is-4">Strong Correlation of Concept Frequency and Accuracy</h2>
+          <h2 class="title is-4">VLMs show imbalanced performance due to a long-tailed concept distribution</h2>
           <div class="content has-text-justified">
 
             <div class="item">
@@ -232,6 +231,8 @@
               <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/> -->
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
+                <div class="item">
+    
                 <section class="hero is-big">
                   <div class="hero-body">
                     <div class="container" >
@@ -247,11 +248,11 @@
                           <div class="images-container" style="align-items: center;">
                             
                             <div class="image-with-subtitle">
-                              <img src="static/images/imagenet_1k_freq.png" alt="1" style="height: 320px;"/>
+                              <img src="static/images/imagenet_1k_freq.png" alt="1" style="height: 310px;"/>
                               <p class="subtitle-text">Frequency Distribution</p>
                             </div>
                             <div class="image-with-subtitle" >
-                              <img src="static/images/imagenet_1k_acc.png" alt="2" style="height: 320px;"/>
+                              <img src="static/images/imagenet_1k_acc.png" alt="2" style="height: 310px;"/>
                               <p class="subtitle-text">Zero-Shot Accuracy</p>
                             </div>
     
@@ -269,11 +270,11 @@
                           <div class="images-container">
     
                             <div class="image-with-subtitle">
-                              <img src="static/images/flowers102_freq.png" alt="1" style="height: 320px;"/>
+                              <img src="static/images/flowers102_freq.png" alt="1" style="height: 310px;"/>
                               <p class="subtitle-text">Frequency Distribution</p>
                             </div>
                             <div class="image-with-subtitle">
-                              <img src="static/images/flowers102_acc.png" alt="2" style="height: 320px;"/>
+                              <img src="static/images/flowers102_acc.png" alt="2" style="height: 310px;"/>
                               <p class="subtitle-text">Zero-Shot Accuracy</p>
                             </div>
     
@@ -291,11 +292,11 @@
                           <div class="images-container">
     
                             <div class="image-with-subtitle">
-                              <img src="static/images/fgvc_aircraft_freq.png" alt="1" style="height: 320px;"/>
+                              <img src="static/images/fgvc_aircraft_freq.png" alt="1" style="height: 310px;"/>
                               <p class="subtitle-text">Frequency Distribution</p>
                             </div>
                             <div class="image-with-subtitle">
-                              <img src="static/images/fgvc_aircraft_acc.png" alt="2" style="height: 320px;"/>
+                              <img src="static/images/fgvc_aircraft_acc.png" alt="2" style="height: 310px;"/>
                               <p class="subtitle-text">Zero-Shot Accuracy</p>
                             </div>
     
@@ -314,11 +315,11 @@
                           <div class="images-container">
     
                             <div class="image-with-subtitle">
-                              <img src="static/images/cub2011_freq.png" alt="1" style="height: 320px;" />
+                              <img src="static/images/cub2011_freq.png" alt="1" style="height: 310px;" />
                               <p class="subtitle-text">Frequency Distribution</p>
                             </div>
                             <div class="image-with-subtitle">
-                              <img src="static/images/cub2011_acc.png" alt="2" style="height: 320px;"/>
+                              <img src="static/images/cub2011_acc.png" alt="2" style="height: 310px;"/>
                               <p class="subtitle-text">Zero-Shot Accuracy</p>
                             </div>
     
@@ -337,11 +338,11 @@
                           <div class="images-container">
     
                             <div class="image-with-subtitle">
-                              <img src="static/images/stanford_cars_freq.png" alt="1" style="height: 320px;"/>
+                              <img src="static/images/stanford_cars_freq.png" alt="1" style="height: 310px;"/>
                               <p class="subtitle-text">Frequency Distribution</p>
                             </div>
                             <div class="image-with-subtitle">
-                              <img src="static/images/stanford_cars_acc.png" alt="2" style="height: 320px;"/>
+                              <img src="static/images/stanford_cars_acc.png" alt="2" style="height: 310px;"/>
                               <p class="subtitle-text">Zero-Shot Accuracy</p>
                             </div>
     
@@ -359,11 +360,11 @@
                           <div class="images-container">
     
                             <div class="image-with-subtitle">
-                              <img src="static/images/oxford_pets_freq.png" alt="1" style="height: 320px;"/>
+                              <img src="static/images/oxford_pets_freq.png" alt="1" style="height: 310px;"/>
                               <p class="subtitle-text">Frequency Distribution</p>
                             </div>
                             <div class="image-with-subtitle">
-                              <img src="static/images/oxford_pets_acc.png" alt="2" style="height: 320px;"/>
+                              <img src="static/images/oxford_pets_acc.png" alt="2" style="height: 310px;"/>
                               <p class="subtitle-text">Zero-Shot Accuracy</p>
                             </div>
     
@@ -381,11 +382,11 @@
                           <div class="images-container">
     
                             <div class="image-with-subtitle">
-                              <img src="static/images/food101_freq.png" alt="1" style="height: 320px;"/>
+                              <img src="static/images/food101_freq.png" alt="1" style="height: 310px;"/>
                               <p class="subtitle-text">Frequency Distribution</p>
                             </div>
                             <div class="image-with-subtitle">
-                              <img src="static/images/food101_acc.png" alt="2" style="height: 320px;"/>
+                              <img src="static/images/food101_acc.png" alt="2" style="height: 310px;"/>
                               <p class="subtitle-text">Zero-Shot Accuracy</p>
                             </div>
     
@@ -774,11 +775,11 @@
   <section class="section hero is-light" id="BibTeX">
     <div class="container is-max-desktop content ">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@misc{liu2023language,
-        title={Language Models as Black-Box Optimizers for Vision-Language Models}, 
-        author={Shihong Liu and Zhiqiu Lin and Samuel Yu and Ryan Lee and Tiffany Ling and Deepak Pathak and Deva Ramanan},
-        year={2023},
-        eprint={2309.05950},
+      <pre><code>@misc{parashar2023tailvlm, <!--Fill once available-->
+        title={The Neglected Tails of Vision Language Models.}, 
+        author={Shubham Parashar and Zhiqiu Lin and Tian Liu and Xiangjue Dong and Yanan Li and Deva Ramanan and James Caverlee and Shu Kong},
+        year={2023}, <!--Fill once available-->
+        eprint={2309.05950}, <!--Fill once available-->
         archivePrefix={arXiv},
         primaryClass={cs.CL}
   }</code></pre>
