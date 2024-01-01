@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Meta tags for social media banners, these should be filled in appropriately as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
   <meta name="description" content="">
   <meta property="og:title" content="The Neglected Tails of Vision Language Models." />
@@ -139,8 +139,8 @@
             <p style="text-align: justify;">
               Vision-language models (VLMs) such as CLIP excel in zero-shot recognition but 
               exhibit drastically imbalanced performance across visual concepts in downstream 
-              tasks. Despite high zero-shot accuracy on ImageNet (72.7%), CLIP performs poorly (&lt;10%) on certain concepts like tailed frog and night snake, 
-              likely due to underrepresentation in VLM pretraining datasets. Assessing this imbalance is complex due to the difficulty in calculating concept frequency in large-scale pre-training data. 
+              tasks. Despite high zero-shot accuracy on ImageNet (72.7%), CLIP performs poorly (&lt;10%) on certain concepts like night snake and gyromitra, 
+              likely due to underrepresentation in VLM's pretraining datasets. Assessing this imbalance is complex due to the difficulty in calculating concept frequency in large-scale pretraining data. 
             </p>
             <ul>
               <li>
@@ -400,8 +400,8 @@
                 </section>
 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                <strong>Left</strong>: By analyzing the texts of large-scale pre-training datasets such as LAION-400M (<span style="color: #4b92c3">blue</span>) and LAION-2B (<span style="color: #ff983e">orange</span>), we show that 
-                these pre-training datasets exhibhit a long-tailed distribution for visual concepts defined in a variety of
+                <strong>Left</strong>: By analyzing the texts of large-scale pretraining datasets such as LAION-400M (<span style="color: #4b92c3">blue</span>) and LAION-2B (<span style="color: #ff983e">orange</span>), we show that 
+                these pretraining datasets exhibit a long-tailed distribution for visual concepts defined in a variety of
                 downstream tasks.  
                 <br/>
                 <br />
@@ -592,8 +592,8 @@
               </section>
 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                Our analysis of LAION-400M and LAION-2B helps us identify visual concepts that under-represented
-                in the pre-training datasets of Vision Language models. Further, we show that state-of-the-art multi-modal systems including
+                Our analysis of LAION-400M and LAION-2B helps us identify visual concepts that are under-represented
+                in the pretraining datasets of Vision Language models. Further, we show that state-of-the-art multi-modal systems including
                 <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, 
                 <a href="https://openai.com/dall-e-3">DALL-E 3</a>, and <a href="https://stablediffusionweb.com/">SD-XL</a> all fail to recognize or generate these rare concepts. More examples are shown in our paper.
               </p>
@@ -615,16 +615,16 @@
           <h2 class="title is-3">Solutions</h2>
           <div class="content has-text-justified">
             <p>
-              To mitigate the imbalanced performance of VLMs we propose a novel prompting solution (REAL-Prompt) and a retrieval augmented strategy
+              To mitigate the imbalanced performance of VLMs we propose a novel prompting solution (REAL-Prompt) and a retrieval-augmented strategy
               REAL-Linear.
             </p>
           </div>
-          <h2 class="title is-4">REAL-prompt</h2>
+          <h2 class="title is-4">REAL-Prompt</h2>
           <div class="content has-text-justified">
-            <img src="static/images/synonyms_serif-v7-compressed.png" alt="Showcasing the efficiency of REAL-prompt."
+            <img src="static/images/synonyms_serif-v7-compressed.png" alt="Showcasing the efficiency of REAL-Prompt."
                 style="height: auto; display: block; margin: 10px;">
               <p>
-                  REAL-prompt replaces the given concept names with their most frequent synonyms (in the pre-training data of VLMs) and constructs prompts for zero-shot recognition. We display some
+                  REAL-Prompt replaces the given concept names with their most frequent synonyms (in the pretraining data of VLMs) and constructs prompts for zero-shot recognition. We display some
                   specific concepts from ImageNet, their most frequent synonyms, frequency (in LAION-400M), and their per-class accuracy. Clearly,
                   the simple change in prompts significantly improves zero-shot recognition. 
               </p>
@@ -670,7 +670,7 @@
                           <img src="static/images/Pocket Orchid.png" alt="1" />
                           <p class="subtitle-text" style="text-align: justify;"><strong>Hard Leaved Pocket Orchid</strong>, a type of orchid with a distinctive pouch and symmetrical large petals. When prompted with the original conceptname(hard leaved pocket orchid),
                             both DALLE-3 and SD-XL generate incorrect images (note the missing pocket and shape of the petals). However, when prompted with the most frequent synonym (Paphiopedilum micranthum), 
-                            DALLE-3 produces the correct image. In contrast, SD-XL is able to recover the shape of petals but still misses the pocket.</p>
+                            DALLE-3 produces the correct image. In contrast, SD-XL can recover the shape of petals but still misses the pocket.</p>
                         </div>
                       </div>
                     </div>
@@ -681,8 +681,8 @@
                         <div class="image-with-subtitle">
                           <img src="static/images/aeroplane.png" alt="1" />
                           <p class="subtitle-text" style="text-align: justify;"><strong>BAE 146-200</strong>,
-                            an airplane with 4 engines.When prompted with the original concept name (BAE 146-200), both DALLE-3 and SD-XL fail by generating only 2 engines. DALL-E 3 also mistakenly generate extra wings sometimes!
-                            However, when prompted with the most frequent synonym (avro rj85), both are able to generate correct images with 4 engines.</p>
+                            an airplane with 4 engines. When prompted with the original concept name (BAE 146-200), both DALLE-3 and SD-XL fail by generating only 2 engines. DALL-E 3 also mistakenly generates extra wings sometimes!
+                            However, when prompted with the most frequent synonym (avro rj85), both can generate correct images with 4 engines.</p>
                         </div>
                       </div>
                     </div>
@@ -694,7 +694,7 @@
                           <img src="static/images/keyboard.png" alt="1" />
                           <p class="subtitle-text" style="text-align: justify;">keyboard space bar,
                             a long bar at the bottom of a computer keyboard. When prompted with the original concept name (keyboard space bar), 
-                            both DALLE-3 and SD-XL fail by focusing on generating images of the keyboard. However, when prompted with the most frequent synonyms (space bar), both are able to generate correct images.</p>
+                            both DALLE-3 and SD-XL fail by focusing on generating images of the keyboard. However, when prompted with the most frequent synonyms (space bar), both can generate correct images.</p>
                         </div>
                       </div>
                     </div>
@@ -706,7 +706,7 @@
             <div class="item">
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
                 We show some tailed concepts where DALL-E 3 and SD-XL can fail to generate correct images when using the original concept name.
-                However using REAL-prompt, which uses the most frequent synonym to construct prompts, can help produce correct images.
+                However using REAL-Prompt, which uses the most frequent synonym to construct prompts, can help produce correct images.
               </p>
             </div>
           </div>
@@ -729,9 +729,9 @@
               <img src="static/images/real_linear_final_new.png" alt="Image showing DALL-E 3 output" />
             </div>
             <p>
-              To further improve the zero-shot recognition performance of VLMs, we propose REAL-Linear, a lightweight yet powerful retrieval augmented solution. REAL-Linear uses all synonyms of 
-              the given concepts to retrieve class-balanced subset of pretraining images (e.g., 500 images per class from the
-              dataset LAION-400M). The steps have been demonstrated above. 
+              To further improve the zero-shot recognition performance of VLMs, we propose REAL-Linear, a lightweight yet powerful retrieval-augmented solution. REAL-Linear uses all synonyms of 
+              the given concepts to retrieve a class-balanced subset of pretraining images (e.g., 500 images per class from the
+              dataset LAION-400M). These steps have been demonstrated above. 
             </p>
           </div>
         </div>
@@ -752,7 +752,7 @@
               <!-- Your image here -->
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
                 Within the zero-shot prompting paradigm, our REAL-Prompt outperforms existing prompting approaches such as <a href="https://arxiv.org/abs/2210.07183">DCLIP</a>, and <a href="https://arxiv.org/abs/2209.03320">CuPL</a>. 
-                Next we show that our REAL-Linear rivals the recent retrieval augmented method <a href="https://react-vl.github.io/">REACT</a>. Best numbers highlighted in bold, second best underlined.
+                Next, we show that our REAL-Linear rivals the recent retrieval augmented method <a href="https://react-vl.github.io/">REACT</a>. The best numbers are highlighted in bold, second best are underlined.
               </p>
               <img src="static/images/real-benchmark.png" alt="Image showing DALL-E 3 output" />
             </div>
