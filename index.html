@@ -137,44 +137,19 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p style="text-align: justify;">
-              Vision-language models (VLMs) excel in zero-shot
-recognition but their performance varies greatly across
-different visual concepts. For example, although CLIP
-achieves impressive accuracy on ImageNet (60-80%), its
-performance drops below 10% for more than ten concepts
-like night snake, presumably due to their limited presence in the pretraining data. However, measuring the frequency of concepts in VLMs’ large-scale datasets is challenging. We address this by using large language models
-(LLMs) to count the number of pretraining texts that contain synonyms of these concepts. Our analysis confirms
-that popular datasets, such as LAION, exhibit a long-tailed
-concept distribution, yielding biased performance in VLMs.
-We also find that downstream applications of VLMs, including visual chatbots (e.g., GPT-4V) and text-to-image models
-(e.g., Stable Diffusion), often fail to recognize or generate
-images of rare concepts identified by our method. To mitigate the imbalanced performance of zero-shot VLMs, we
-propose REtrieval-Augmented Learning (REAL). First, instead of prompting VLMs using the original class names,
-REAL uses their most frequent synonyms found in pretraining texts. This simple change already outperforms costly
-human-engineered and LLM-enriched prompts over nine
-benchmark datasets. Second, REAL trains a linear classifier on a small yet balanced set of pretraining data retrieved using concept synonyms. REAL surpasses the previous zero-shot SOTA, using 400× less storage and 10,000×
-less training time!
+              Contemporary autonomous vehicle (AV) benchmarks have advanced techniques for training 3D detectors, 
+              particularly on large-scale LiDAR data. Surprisingly, although semantic class labels naturally follow a long-tailed distribution, 
+              existing benchmarks focus on only a few common classes (e.g., pedestrian and car) and neglect many rare classes in-the-tail (e.g., debris and stroller). 
+              However, AVs must reliably detect both common and rare classes for safe operation in the open world. We address this challenge by formally studying the problem of Long-Tailed 3D Detection (LT3D), 
+              which evaluates all annotated classes, including those in-the-tail. We address LT3D with hierarchical losses that promote feature sharing across common-vs-rare classes, 
+              and introduce diagnostic metrics that award partial credit to "reasonable" mistakes respecting the hierarchy (e.g., mistaking a child for an adult). 
+              Further, we point out that fine-grained tail class accuracy is particularly improved via multimodal late fusion of independently trained uni-modal LiDAR and RGB detectors. 
+              Importantly, such a late-fusion framework allows us to leverage large-scale uni-modal datasets (with more examples for rare classes) to train better uni-modal RGB detectors, 
+              unlike prevailing multimodal detectors that require paired multi-modal training data. Finally, we examine three critical components of our simple late-fusion approach from first principles and investigate whether to train 2D or 3D RGB detectors, 
+              whether to match RGB and LiDAR detections in 3D or the projected 2D image plane for fusion, and how to fuse matched detections. 
+              Extensive experiments reveal that 2D RGB detectors achieve better recognition accuracy for rare classes than 3D RGB detectors and matching on the 2D image plane mitigates depth estimation errors. 
+              Our proposed late-fusion approach significantly improves LT3D performance over prior art, particularly improving mAP on rare classes from 12.8 to 20.0!
             </ul>  
-              <!-- In this work, we make the first attempt to measure 
-              the concept frequency in VLMs' pretraining data by analyzing pretraining 
-              texts. We use off-the-shelf language models to help count relevant texts that 
-              contain synonyms of the given concepts and resolve ambiguous cases. Our analysis 
-              confirms that popular VLM datasets like LAION indeed exhibit a long-tailed 
-              concept distribution, which strongly correlates with per-class accuracies. 
-              Further, mainstream multimodal systems, including visual chatbots and 
-              text-to-image models, struggle with the rare concepts identified by our method. 
-              Next, to mitigate VLMs' imbalanced performance in zero-shot recognition, we 
-              propose <strong>RE</strong>trieval-<strong>A</strong>ugmented <strong>L</strong>earning <strong>(REAL)</strong>. First, instead of prompting VLMs 
-              using the original class names defined in a downstream task, REAL uses their 
-              most frequent synonyms found in the pretraining texts. This already outperforms 
-              human-engineered and LLM-generated prompts over nine benchmark datasets, likely 
-              because VLMs have seen more images associated with the frequently used synonyms. 
-              Second, REAL uses all the concept synonyms to retrieve a small, class-balanced 
-              set of pretraining data to train a robust classifier. REAL surpasses the recent 
-              retrieval-augmented solution REACT, using 400 times less storage and 10,000 
-              times less training time! -->
-            <!-- </p> -->
-          
           </div>
         </div>
       </div>
@@ -187,16 +162,29 @@ less training time!
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Measuring Concept Frequency in Pretraining Data</h2>
+          <h2 class="title is-3">Long-Tailed 3D Benchmarking Protocol</h2>
           <!-- <h2 class="title is-4">Strong Correlation of Concept Frequency and Accuracy</h2> -->
           <div class="content has-text-justified">
 
             <div class="item">
               <!-- Your image here -->
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
-              <img src="static/images/tiger.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
+              <img src="static/images/nuScenes_Distribution.pdf" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                We use LLMs such as ChatGPT to help count texts relevant to the concept of interest, as visually illustrated above for the concept of "tiger".
+                we report performance for three groups of classes based on their cardinality (split by dotted lines): Many, Medium, and Few.
+              </p>
+              <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
+                style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
+            </div>
+          </div>
+          <div class="content has-text-justified">
+
+            <div class="item">
+              <!-- Your image here -->
+              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
+              <img src="static/images/Hierarchy_v1.pdf" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                The nuScenes defines a semantic hierarchy for all classes, grouping semantically similar classes under coarse-grained categories.
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -766,9 +754,9 @@ less training time!
   <section class="section hero is-light" id="BibTeX">
     <div class="container is-max-desktop content ">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@article{parashar2024neglected,
-        title={The Neglected Tails of Vision-Language Models},
-        author={Parashar, Shubham and Lin, Zhiqiu and Liu, Tian and Dong, Xiangjue and Li, Yanan and Ramanan, Deva and Caverlee, James and Kong, Shu},
+      <pre><code>@article{yechi2024long-tailed,
+        title={Long-Tailed 3D Detection via Multi-Modal Late-Fusion},
+        author={Ma, Yechi and Peri, Neehar and Wei, Shuoquan and HUa, Wei and Li, Yanan and Ramanan, Deva and Kong, Shu},
         journal={arXiv preprint arXiv:2401.12425},
         year={2024}
       }</code></pre>
