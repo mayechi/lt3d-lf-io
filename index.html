@@ -171,7 +171,7 @@
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
               <img src="static/images/nuScenes_Distribution.pdf" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                we report performance for three groups of classes based on their cardinality (split by dotted lines): Many, Medium, and Few.
+                We report performance for three groups of classes based on their cardinality (split by dotted lines): Many, Medium, and Few.
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -195,552 +195,137 @@
     </div>
   </section>
 
-  <!-- Method Overview -->
-  <section class="section hero is-light">
+  <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Our Findings</h2>
-          <h2 class="title is-4">VLMs show imbalanced performance due to a long-tailed concept distribution</h2>
+          <h2 class="title is-3">LT3D Methods: The Devil Is In The Details</h2>
+          <h2 class="title is-4">Grouping-Free Detector Head</h2>
           <div class="content has-text-justified">
 
             <div class="item">
               <!-- Your image here -->
-              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>
-              <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/> -->
+              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
+              <img src="static/images/arch_v4.pdf" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                We treat each class as its own group to avoid hand-crafted grouping heuristics and design a group-free strategy, in which each class has only one linear layer as its detector (Fig.~\ref{fig:hierarchy_train}) and all classes share a signle detector head.
+              </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
-                <div class="item">
-    
-                <section class="hero is-big">
-                  <div class="hero-body">
-                    <div class="container" >
-                      <div id="results-carousel" class="carousel results-carousel">
-    
-                        <div class="item">
-    
-                          <div class="query-container">
-                            <p class="user-query">ImageNet</p>
-                          </div>
-    
-                          <!-- Image container -->
-                          <div class="images-container" style="align-items: center;">
-                            
-                            <div class="image-with-subtitle">
-                              <img src="static/images/imagenet_1k_freq.png" alt="1" style="height: 310px;"/>
-                              <p class="subtitle-text">Frequency Distribution</p>
-                            </div>
-                            <div class="image-with-subtitle" >
-                              <img src="static/images/imagenet_1k_acc.png" alt="2" style="height: 310px;"/>
-                              <p class="subtitle-text">Zero-Shot Accuracy</p>
-                            </div>
-    
-                          </div>
-    
-                        </div>
-    
-                        <div class="item">
-    
-                          <div class="query-container">
-                            <p class="user-query">Flowers</p>
-                          </div>
-    
-                          <!-- Image container -->
-                          <div class="images-container">
-    
-                            <div class="image-with-subtitle">
-                              <img src="static/images/flowers102_freq.png" alt="1" style="height: 310px;"/>
-                              <p class="subtitle-text">Frequency Distribution</p>
-                            </div>
-                            <div class="image-with-subtitle">
-                              <img src="static/images/flowers102_acc.png" alt="2" style="height: 310px;"/>
-                              <p class="subtitle-text">Zero-Shot Accuracy</p>
-                            </div>
-    
-                          </div>
-    
-                        </div>
-    
-                        <div class="item">
-    
-                          <div class="query-container">
-                            <p class="user-query">Aircraft</p>
-                          </div>
-    
-                          <!-- Image container -->
-                          <div class="images-container">
-    
-                            <div class="image-with-subtitle">
-                              <img src="static/images/fgvc_aircraft_freq.png" alt="1" style="height: 310px;"/>
-                              <p class="subtitle-text">Frequency Distribution</p>
-                            </div>
-                            <div class="image-with-subtitle">
-                              <img src="static/images/fgvc_aircraft_acc.png" alt="2" style="height: 310px;"/>
-                              <p class="subtitle-text">Zero-Shot Accuracy</p>
-                            </div>
-    
-                          </div>
-    
-                        </div>
-    
-    
-                        <div class="item">
-    
-                          <div class="query-container">
-                            <p class="user-query">CUB</p>
-                          </div>
-    
-                          <!-- Image container -->
-                          <div class="images-container">
-    
-                            <div class="image-with-subtitle">
-                              <img src="static/images/cub2011_freq.png" alt="1" style="height: 310px;" />
-                              <p class="subtitle-text">Frequency Distribution</p>
-                            </div>
-                            <div class="image-with-subtitle">
-                              <img src="static/images/cub2011_acc.png" alt="2" style="height: 310px;"/>
-                              <p class="subtitle-text">Zero-Shot Accuracy</p>
-                            </div>
-    
-                          </div>
-    
-                        </div>
-    
-    
-                        <div class="item">
-    
-                          <div class="query-container">
-                            <p class="user-query">Cars</p>
-                          </div>
-    
-                          <!-- Image container -->
-                          <div class="images-container">
-    
-                            <div class="image-with-subtitle">
-                              <img src="static/images/stanford_cars_freq.png" alt="1" style="height: 310px;"/>
-                              <p class="subtitle-text">Frequency Distribution</p>
-                            </div>
-                            <div class="image-with-subtitle">
-                              <img src="static/images/stanford_cars_acc.png" alt="2" style="height: 310px;"/>
-                              <p class="subtitle-text">Zero-Shot Accuracy</p>
-                            </div>
-    
-                          </div>
-    
-                        </div>
-    
-                        <div class="item">
-    
-                          <div class="query-container">
-                            <p class="user-query">Pets</p>
-                          </div>
-    
-                          <!-- Image container -->
-                          <div class="images-container">
-    
-                            <div class="image-with-subtitle">
-                              <img src="static/images/oxford_pets_freq.png" alt="1" style="height: 310px;"/>
-                              <p class="subtitle-text">Frequency Distribution</p>
-                            </div>
-                            <div class="image-with-subtitle">
-                              <img src="static/images/oxford_pets_acc.png" alt="2" style="height: 310px;"/>
-                              <p class="subtitle-text">Zero-Shot Accuracy</p>
-                            </div>
-    
-                          </div>
-    
-                        </div>
-    
-                        <div class="item">
-    
-                          <div class="query-container">
-                            <p class="user-query">Food</p>
-                          </div>
-    
-                          <!-- Image container -->
-                          <div class="images-container">
-    
-                            <div class="image-with-subtitle">
-                              <img src="static/images/food101_freq.png" alt="1" style="height: 310px;"/>
-                              <p class="subtitle-text">Frequency Distribution</p>
-                            </div>
-                            <div class="image-with-subtitle">
-                              <img src="static/images/food101_acc.png" alt="2" style="height: 310px;"/>
-                              <p class="subtitle-text">Zero-Shot Accuracy</p>
-                            </div>
-    
-                          </div>
-    
-                        </div>    
-    
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                <strong>Left</strong>: By analyzing the texts of large-scale pretraining datasets such as LAION-400M (<span style="color: #4b92c3">blue</span>) and LAION-2B (<span style="color: #ff983e">orange</span>), we show that 
-                these pretraining datasets exhibit a long-tailed distribution for visual concepts defined in a variety of
-                downstream tasks.  
-                <br/>
-                <br />
-                <strong>Right</strong>: We show that for zero-shot recognition, OpenCLIP models trained on LAION-400M (<span style="color: #4b92c3">blue</span>) and LAION-2B (<span style="color: #ff983e">orange</span>) respecitvely
-                yield per-class accuracies that strongly correlate with the long-tailed distribution of concept frequencies (binned on a log scale).
-                Interestingly, other VLMs such as CLIP (<span style="color: #de5252">red</span>) and MetaCLIP (<span style="color: #56b356">green</span>) (trained on private-data) also show similar imbalanced performance. 
-              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- End Method Overview -->
 
-
-  <!-- Text-Image generation -->
-  <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-4">Multi-Modal Systems Fail on Rare Concepts</h2>
-          <div class="content has-text-justified">
-
-            <div class="item">
-              <!-- Your image here -->
-              <!-- <img src="static/images/dalle3.png" alt="Image showing DALL-E 3 output" /> -->
-              <section class="hero is-small">
-                <div class="hero-body">
-                  <div class="container">
-                    <div id="results-carousel" class="carousel results-carousel">
-  
-                      <div class="item">
-  
-                        <!-- <div class="query-container">
-                          <p class="user-query">Tailed Frog</p>
-                        </div> -->
-  
-                        <!-- Image container -->
-                        <div class="images-container">
-  
-                          <div class="image-with-subtitle">
-                            <img src="static/images/tailed_frog_v3.png" alt="1" />
-                            <p class="subtitle-text">Tailed Frog</p>
-                          </div>
-  
-                        </div>
-  
-                      </div>
-  
-                      <div class="item">
-  
-                        <!-- <div class="query-container">
-                          <p class="user-query">Electric Ray</p>
-                        </div> -->
-  
-                        <!-- Image container -->
-                        <div class="images-container">
-  
-                          <div class="image-with-subtitle">
-                            <img src="static/images/electric_ray_v2.png" alt="1" />
-                            <p class="subtitle-text">Electric Ray</p>
-                          </div>
-  
-                        </div>
-  
-                      </div>
-  
-                      <div class="item">
-  
-                        <!-- <div class="query-container">
-                          <p class="user-query">BAE 146-200</p>
-                        </div> -->
-  
-                        <!-- Image container -->
-                        <div class="images-container">
-  
-                          <div class="image-with-subtitle">
-                            <img src="static/images/boe146200_v2.png" alt="1" />
-                            <p class="subtitle-text">BAE 146-200</p>
-                          </div>
-                      
-  
-                        </div>
-  
-                      </div>
-  
-  
-                      <div class="item">
-  
-                        <!-- <div class="query-container">
-                          <p class="user-query">Pan Flute</p>
-                        </div> -->
-  
-                        <!-- Image container -->
-                        <div class="images-container">
-  
-                          <div class="image-with-subtitle">
-                            <img src="static/images/pan_flute_v2.png" alt="1"  />
-                            <p class="subtitle-text">Pan Flute</p>
-                          </div>
-                        
-  
-                        </div>
-  
-                      </div>
-  
-  
-                      <div class="item">
-  
-                        <!-- <div class="query-container">
-                          <p class="user-query">Night Snake</p>
-                        </div> -->
-  
-                        <!-- Image container -->
-                        <div class="images-container">
-  
-                          <div class="image-with-subtitle">
-                            <img src="static/images/night_snake_v2.png" alt="1" />
-                            <p class="subtitle-text">Night Snake</p>
-                          </div>
-  
-                        </div>
-  
-                      </div>
-  
-                      <div class="item">
-  
-                        <!-- <div class="query-container">
-                          <p class="user-query">Longnose Gar</p>
-                        </div> -->
-  
-                        <!-- Image container -->
-                        <div class="images-container">
-  
-                          <div class="image-with-subtitle">
-                            <img src="static/images/longnose_gar_v2.png" alt="1" />
-                            <p class="subtitle-text">Longnose Gar</p>
-                          </div>
-                          
-  
-                        </div>
-  
-                      </div>
-  
-                      <div class="item">
-  
-                        <!-- <div class="query-container">
-                          <p class="user-query">Coral Fungus</p>
-                        </div> -->
-  
-                        <!-- Image container -->
-                        <div class="images-container">
-  
-                          <div class="image-with-subtitle">
-                            <img src="static/images/coral_fungus_v2.png" alt="1" />
-                            <p class="user-query">Coral Fungus</p>
-                          </div>
-  
-                        </div>
-  
-                      </div>
-  
-                      <div class="item">
-                        <!-- Image container -->
-                        <div class="images-container">
-  
-                          <div class="image-with-subtitle">
-                            <img src="static/images/hard_leaved_pocket_orchid_v2.png" alt="1" />
-                            <p class="user-query">Hard-leaved Pocket Orchid</p>
-                          </div>
-  
-                        </div>
-  
-                      </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                Our analysis of LAION-400M and LAION-2B helps us identify visual concepts that are under-represented
-                in the pretraining datasets of Vision Language models. Further, we show that state-of-the-art multi-modal systems including
-                <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, 
-                <a href="https://openai.com/dall-e-3">DALL-E 3</a>, and <a href="https://stablediffusionweb.com/">SD-XL</a> all fail to recognize or generate these rare concepts. More examples are shown in our paper.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Prompt Inversion -->
-
-
-  <!-- Prompt Inversion -->
   <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Solutions</h2>
+          <h2 class="title is-4">Multimodal Filtering in 3D for Detection Fusion</h2>
           <div class="content has-text-justified">
-            <p>
-              To mitigate the imbalanced performance of VLMs we propose a novel prompting solution (REAL-Prompt) and a retrieval-augmented strategy
-              REAL-Linear.
-            </p>
-          </div>
-          <h2 class="title is-4">REAL-Prompt</h2>
-          <div class="content has-text-justified">
-            <img src="static/images/synonyms_serif-v7-compressed.png" alt="Showcasing the efficiency of REAL-Prompt."
-                style="height: auto; display: block; margin: 10px;">
-              <p>
-                  REAL-Prompt replaces the given concept names with their most frequent synonyms (in the pretraining data of VLMs) and constructs prompts for zero-shot recognition. We display some
-                  specific concepts from ImageNet, their most frequent synonyms, frequency (in LAION-400M), and their per-class accuracy. Clearly,
-                  the simple change in prompts significantly improves zero-shot recognition. 
-              </p>
-              <div class="item">
-                <!-- Your image here -->
-                
-              </div>
-            <section class="hero is-small">
-              <div class="hero-body">
-                <div class="container">
-                  <div id="results-carousel" class="carousel results-carousel">
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/bank_swallow.png" alt="1" />
-                          <p class="subtitle-text" style="text-align: justify;">
-                            <strong>Bank Swallow</strong>, a small bird with brown back and white belly. When prompted with the original concept name (bank swallow), 
-                            both DALL-E 3 and SD-XL generate incorrect images of birds with incorrect black backs. However, prompting with the most frequent synonym (sand martin) 
-                            guides both systems to produce correct images.
-                          </p>
-                        </div>
-                        
-                      </div>
-                      
-                    </div>
 
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/Thorn Apple.png" alt="1" />
-                          <p class="subtitle-text" style="text-align: justify;"><strong>Thorn Apple</strong>, a plant with large, white, trumpet-shaped flowers. When prompted with the original concept name(thorn apple),
-                            DALL-E 3 generates an image with sharp thorns along its stem. Even worse, SD-XL takes the names superficially and generates an apple with thorns. On the contrary, prompting with the most frequent synonym (datura) leads to correct images in both systems.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/Pocket Orchid.png" alt="1" />
-                          <p class="subtitle-text" style="text-align: justify;"><strong>Hard Leaved Pocket Orchid</strong>, a type of orchid with a distinctive pouch and symmetrical large petals. When prompted with the original conceptname(hard leaved pocket orchid),
-                            both DALL-E 3 and SD-XL generate incorrect images (note the missing pocket and shape of the petals). However, when prompted with the most frequent synonym (Paphiopedilum micranthum), 
-                            DALL-E 3 produces the correct image. In contrast, SD-XL can recover the shape of petals but still misses the pocket.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/aeroplane.png" alt="1" />
-                          <p class="subtitle-text" style="text-align: justify;"><strong>BAE 146-200</strong>,
-                            an airplane with 4 engines. When prompted with the original concept name (BAE 146-200), both DALL-E 3 and SD-XL fail by generating only 2 engines. DALL-E 3 also mistakenly generates extra wings sometimes!
-                            However, when prompted with the most frequent synonym (avro rj85), both can generate correct images with 4 engines.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="item">
-                      <!-- Image container -->
-                      <div class="images-container">
-                        <div class="image-with-subtitle">
-                          <img src="static/images/keyboard.png" alt="1" />
-                          <p class="subtitle-text" style="text-align: justify;">keyboard space bar,
-                            a long bar at the bottom of a computer keyboard. When prompted with the original concept name (keyboard space bar), 
-                            both DALL-E 3 and SD-XL fail by focusing on generating images of the keyboard. However, when prompted with the most frequent synonyms (space bar), both can generate correct images.</p>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                </div>
-              
-            </section>
             <div class="item">
+              <!-- Your image here -->
+              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
+              <img src="static/images/Filter_v1.pdf" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                We show some tailed concepts where DALL-E 3 and SD-XL can fail to generate correct images when using the original concept name.
-                However using REAL-Prompt, which uses the most frequent synonym to construct prompts, can help produce correct images.
+                Multimodal filtering effectively removes false-positive LiDAR detections despite their high confidence scores.
               </p>
+              <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
+                style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
             </div>
-          </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- End Prompt Inversion -->
 
-  <!-- Quantitative Results -->
   <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-4">REAL-Linear</h2>
+          <h2 class="title is-4">Delving into Multi-Modal Late-Fusion for LT3D</h2>
           <div class="content has-text-justified">
+
             <div class="item">
               <!-- Your image here -->
-              <img src="static/images/real_linear_final_new.png" alt="Image showing DALL-E 3 output" />
+              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
+              <img src="static/images/splashy-fig-v3" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                We examine three key components in the late-fusion of uni-modal RGB and LiDAR detectors。
+              </p>
+              <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
+                style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
             </div>
-            <p>
-              To further improve the zero-shot recognition performance of VLMs, we propose REAL-Linear, a lightweight yet powerful retrieval-augmented solution. REAL-Linear uses all synonyms of 
-              the given concepts to retrieve a class-balanced subset of pretraining images (e.g., 500 images per class from the
-              dataset LAION-400M). These steps have been demonstrated above. 
-            </p>
+          </div>
+          <div class="content has-text-justified">
+
+            <div class="item">
+              <!-- Your image here -->
+              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
+              <img src="static/images/LateFusionPipeline-v3.pdf" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                Our multi-modal late-fusion approach takes 3D LiDAR and 2D RGB detections as input, matches 2D RGB and (projected) 3D LiDAR detections on the image plane, and fuses matched predictions with score calibration and probabilistic ensembling to produce 3D detections.
+              </p>
+              <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
+                style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Visualizations</h2>
+          <div class="content has-text-justified">
+
+            <div class="item">
+              <!-- Your image here -->
+              <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
+              <img src="static/images/visual-results-v3.pdf" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                Three examples demonstrate how our multi-modal late-fusion improves LT3D by ensembling 2D RGB detections (from DINO) and 3D LiDAR detections (from CenterPoint).
+              </p>
+              <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
+                style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- End Quantitative Results -->
+
+
 
   <!-- Qualitative Results -->
   <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-4">Benchmarking REAL</h2>
+          <h2 class="title is-4">Benchmarking Results</h2>
           <div class="content">
 
             <div class="item">
               <!-- Your image here -->
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                Within the zero-shot prompting paradigm, our REAL-Prompt outperforms existing prompting approaches such as <a href="https://arxiv.org/abs/2210.07183">DCLIP</a>, and <a href="https://arxiv.org/abs/2209.03320">CuPL</a>. 
-                Next, we show that our REAL-Linear rivals the recent retrieval augmented method <a href="https://react-vl.github.io/">REACT</a>. The best numbers are highlighted in bold, second best are underlined.
+                State-of-the-art comparison on nuScenes.
               </p>
-              <img src="static/images/real-benchmark.png" alt="Image showing DALL-E 3 output" />
+              <img src="static/images/Table1.png" alt="1" />
             </div>
             <div class="item">
               <!-- Your image here -->
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;"> 
-                We show that for ImageNet REAL-Linear only uses <strong>5%</strong> of retrieved images and <strong>1%</strong> of compute as compared to recent state-of-the-art REACT.
+                State-of-the-art comparison on Argoverse 2.0.
               </p>
-              <img src="static/images/real_linear_efficient.png" alt="Image showing DALL-E 3 output" style="height: 200px;"/>
+              <img src="static/images/Table2.png" alt="1" style="height: 200px;"/>
             </div>
 
           </div>
