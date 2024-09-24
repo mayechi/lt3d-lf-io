@@ -98,6 +98,17 @@
                     <span>Code</span>
                   </a>
                 </span>
+                
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2312.10986" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>                
               </div>
             <!-- </div>
             <h1><strong style="color: red; font-size: x-large;">XXXXXX</strong></h1>
@@ -115,17 +126,18 @@
           <div class="content has-text-justified">
             <p style="text-align: justify;">
               Contemporary autonomous vehicle (AV) benchmarks have advanced techniques for training 3D detectors, 
-              particularly on large-scale LiDAR data. Surprisingly, although semantic class labels naturally follow a long-tailed distribution, 
-              existing benchmarks focus on only a few common classes (e.g., pedestrian and car) and neglect many rare classes in-the-tail (e.g., debris and stroller). 
+              particularly on large-scale multi-modal (LiDAR + RGB) data. Surprisingly, although semantic class labels naturally follow a long-tailed distribution, 
+              existing benchmarks only focus on a few common classes (e.g., pedestrian and car) and neglect many rare but crucial classes (e.g., emergency vehicle and stroller). 
               However, AVs must reliably detect both common and rare classes for safe operation in the open world. We address this challenge by formally studying the problem of Long-Tailed 3D Detection (LT3D), 
-              which evaluates all annotated classes, including those in-the-tail. We address LT3D with hierarchical losses that promote feature sharing across common-vs-rare classes, 
-              and introduce diagnostic metrics that award partial credit to "reasonable" mistakes respecting the hierarchy (e.g., mistaking a child for an adult). 
-              Further, we point out that fine-grained tail class accuracy is particularly improved via multimodal late fusion of independently trained uni-modal LiDAR and RGB detectors. 
-              Importantly, such a late-fusion framework allows us to leverage large-scale uni-modal datasets (with more examples for rare classes) to train better uni-modal RGB detectors, 
-              unlike prevailing multimodal detectors that require paired multi-modal training data. Finally, we examine three critical components of our simple late-fusion approach from first principles and investigate whether to train 2D or 3D RGB detectors, 
-              whether to match RGB and LiDAR detections in 3D or the projected 2D image plane for fusion, and how to fuse matched detections. 
-              Extensive experiments reveal that 2D RGB detectors achieve better recognition accuracy for rare classes than 3D RGB detectors and matching on the 2D image plane mitigates depth estimation errors. 
-              Our proposed late-fusion approach significantly improves LT3D performance over prior art, particularly improving mAP on rare classes from 12.8 to 20.0!
+              which evaluates all annotated classes, including those in-the-tail. We address LT3D with hierarchical losses that promote feature sharing across classes, 
+              and introduce diagnostic metrics that award partial credit to ``reasonable'' mistakes with respect to the semantic hierarchy (e.g., mistaking a child for an adult). 
+              Further, we point out that rare-class accuracy is particularly improved via multi-modal late fusion (MMLF) of independently trained uni-modal LiDAR and RGB detectors. 
+              Importantly, such an MMLF framework allows us to leverage large-scale uni-modal datasets (with more examples for rare classes) to train better uni-modal detectors, 
+              unlike prevailing end-to-end trained multi-modal detectors that require paired multi-modal data. Finally, we examine three critical components of our simple MMLF approach from first principles and investigate whether to train 2D or 3D RGB detectors for fusion, 
+              whether to match RGB and LiDAR detections in 3D or the projected 2D image plane, and how to fuse matched detections. 
+              Extensive experiments reveal that 2D RGB detectors achieve better recognition accuracy for rare classes than 3D RGB detectors and matching on the 2D image plane mitigates depth estimation errors for better matching. 
+              Our proposed MMLF approach significantly improves LT3D performance over prior work, particularly improving rare class performance from 12.8 to 20.0 mAP! 
+              Our code and models are available on our project page.
             </ul>  
           </div>
         </div>
@@ -148,7 +160,17 @@
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
               <img src="static/images/nuScenes_Distribution_00.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                We report performance for three groups of classes based on their cardinality (split by dotted lines): Many, Medium, and Few.
+                According to the histogram of per-class object counts (on the left), 
+                the nuScenes benchmark focuses on the common classes in cyan (e.g., car and barrier) 
+                but ignores rare ones in red (e.g., stroller and debris). 
+                In fact, the benchmark creates a superclass pedestrian by grouping multiple classes in darkgreen, 
+                including the common class adult and several rare classes (e.g., child and police-officer); 
+                this complicates the analysis of detection performance as pedestrian performance is dominated by adult.
+                Moreover, the ignored superclass pushable-pullable also contains diverse objects such as shopping-cart, dolly, 
+                luggage and trash-can as shown in the top row (on the right). 
+                We argue that AVs should also detect rare classes as they can affect AV behaviors.
+                Following “Large-scale long-tailed recognition in an open world”, 
+                we report performance for three groups of classes based on their cardinality (split by dotted lines): Many, Medium, and Few.
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -161,7 +183,13 @@
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
               <img src="static/images/Hierarchy_v1_00.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                The nuScenes defines a semantic hierarchy for all classes, grouping semantically similar classes under coarse-grained categories.
+                We highlight common classes in white and rare classes in gold.
+                The standard nuScenes benchmark makes two choices for dealing with rare classes: 
+                (1) ignore them (e.g., stroller and pushable-pullable), or 
+                (2) group them into coarse-grained classes (e.g., adult, child, construction-worker, 
+                police-officer are grouped as pedestrian).
+                Since the pedestrian class is dominated by adult, 
+                the standard benchmarking protocol masks the challenge of detecting rare classes like child and police-officer.
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -185,7 +213,9 @@
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
               <img src="static/images/arch_v4_00.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                We treat each class as its own group to avoid hand-crafted grouping heuristics and design a group-free strategy, in which each class has only one linear layer as its detector and all classes share a signle detector head.
+                We leverage the semantic hierarchy defined in the nuScenes dataset to train LT3D detectors by predicting class labels at multiple levels of the hierarchy for an object: its fine-grained label (e.g., child), 
+                its coarse class (e.g., pedestrian), and the root-level class object. This means that the final vocabulary of classes is no longer mutually exclusive, 
+                so we use a sigmoid focal loss that learns separate spatial heatmaps for each class
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -208,7 +238,9 @@
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
               <img src="static/images/Filter_v1_00.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                Multimodal filtering effectively removes false-positive LiDAR detections despite their high confidence scores.
+                Multi-Modal Filtering (MMF) effectively removes high-scoring false-positive LiDAR detections.
+                The green boxes are ground-truth strollers, while the blue boxes are stroller detections from the LiDAR-based detector CenterPoint (left) and RGB-based detector FCOS3D (mid). 
+                The final filtered result removes LiDAR detections not within m meters of any RGB detection, shown in the red region, and keeps all other LiDAR detections, shown in the white region (right).
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -231,7 +263,12 @@
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
               <img src="static/images/splashy-fig-v3_00.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                We examine three key components in the late-fusion of uni-modal RGB and LiDAR detectors。
+                We examine three key components in the multi-modal late-fusion (MMLF) of uni-modal RGB and LiDAR detectors from first principles:
+                A. whether to train 2D or 3D RGB detectors, 
+                B. whether to match uni-modal detections on the 2D image plane or in the 3D bird's-eye-view (BEV), and
+                C. how to best fuse matched detections.
+                Our exploration reveals that using 2D RGB detectors, matching on the 2D image plane, 
+                and combining calibrated scores with Bayesian fusion yields state-of-the-art LT3D performance.
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -269,7 +306,8 @@
               <!-- <img src="static/images/imagenet_1k_freq.png" alt="1" style="width: 250px; height: auto; display: block; margin: 0 auto;"/>-->
               <img src="static/images/visual-results-v3_00.png" alt="1" style="width: auto; height: auto; display: block; margin: 0 auto;"/> 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                Three examples demonstrate how our multi-modal late-fusion improves LT3D by ensembling 2D RGB detections (from DINO) and 3D LiDAR detections (from CenterPoint).
+                Three examples demonstrate how our multi-modal late-fusion (MMLF) approach improves LT3D by ensembling 2D RGB detections (from DINO) and 3D LiDAR detections (from CenterPoint). 
+                In all examples, MMLF correctly relabels detections which are geometrically similar (w.r.t size and shape) in LiDAR but are visually distinct in RGB, such as bus-vs-truck, adult-vs-stroller, and adult-vs-child.
               </p>
               <!-- <img src="static/images/promptgpt.png" alt="Image illustrating ChatGPT interaction with VLMs"
                 style="width: 850px; height: auto; display: block; margin: 0 auto;"> -->
@@ -302,14 +340,14 @@
             <div class="item">
               <!-- Your image here -->
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
-                State-of-the-art comparison on nuScenes.
+                Benchmarking results on nuScenes.
               </p>
               <img src="static/images/Table1.png" alt="1" />
             </div>
             <div class="item">
               <!-- Your image here -->
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;"> 
-                State-of-the-art comparison on Argoverse 2.0.
+                Comparison with the Argoverse 2 state-of-the-art.
               </p>
               <img src="static/images/Table2.png" alt="1" style="height: 200px;"/>
             </div>
@@ -328,6 +366,7 @@
       <pre><code>@article{yechi2024long-tailed,
         title={Long-Tailed 3D Detection via Multi-Modal Late-Fusion},
         author={Ma, Yechi and Peri, Neehar and Wei, Shuoquan and Dave, Achal and Hua, Wei and Li, Yanan and Ramanan, Deva and Kong, Shu},
+        journal={arXiv preprint arXiv:2312.10986},
         year={2024}
       }</code></pre>
       <pre><code>@inproceedings{peri2022towards,
